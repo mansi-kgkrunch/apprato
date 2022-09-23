@@ -1,11 +1,17 @@
-import React from "react"
-import PropTypes from "prop-types"
-import clsx from "clsx"
-import {makeStyles} from "@material-ui/core/styles"
-import {Grid, Avatar} from "@material-ui/core"
-import {SectionHeader} from "components/molecules"
+import React from "react";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import { makeStyles } from "@material-ui/core/styles";
+import { Grid, Avatar, Breadcrumbs, Link, Typography } from "@material-ui/core";
+import { SectionHeader } from "components/molecules";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    marginTop: "50px",
+    "& .MuiGrid-root.section-header__subtitle-wrapper.MuiGrid-item.MuiGrid-grid-xs-12": {
+      marginBottom: "24px",
+    },
+  },
   heading: {
     "& h2": {
       [theme.breakpoints.down("md")]: {
@@ -58,22 +64,70 @@ const useStyles = makeStyles((theme) => ({
   },
   author: {
     marginRight: "20px",
+    [theme.breakpoints.down("md")]: {
+      marginRight: 0,
+    },
+    [theme.breakpoints.down("sm")]: {
+      marginRight: 0,
+    },
   },
-  authorGrid: {},
+  authorGrid: {
+    color: "#0e44ff",
+    fontWeight: 700,
+    justifyContent: "flex-end",
+    // [theme.breakpoints.down("md")]: {
+    //   maxWidth: "50%",
+    //   flexBasis: "50%",
+    //   justifyContent: "flex-end !important",
+    //   marginTop: "52px",
+    // },
+    [theme.breakpoints.down("sm")]: {
+      maxWidth: "50%",
+      flexBasis: "50%",
+      justifyContent: "flex-end !important",
+      // marginTop: "52px",
+    },
+  },
   banner: {
     marginTop: "4rem",
     height: "100%",
     width: "100%",
   },
-}))
+  breadcrumbs: {
+    color: "#8c949e",
+  },
+  title1: {
+    [theme.breakpoints.down("md")]: {
+      maxWidth: "50%",
+      flexBasis: "50%",
+    },
+    [theme.breakpoints.down("sm")]: {
+      maxWidth: "50%",
+      flexBasis: "50%",
+    },
+  },
+}));
 
 const Header = (props) => {
-  const {className, ...rest} = props
-  const classes = useStyles()
-  const post = props.post
+  const { className, ...rest } = props;
+  const classes = useStyles();
+  const post = props.post;
 
   return (
     <div className={clsx(classes.root, className)} {...rest}>
+      <Breadcrumbs
+        separator="|"
+        aria-label="breadcrumb"
+        className={classes.breadcrumbs}
+      >
+        <Link underline="hover" color="inherit" href="/">
+          Development
+        </Link>
+        <Link underline="hover" color="inherit" href="/blog">
+          Technology
+        </Link>
+        <Typography color="text.primary">UI</Typography>
+      </Breadcrumbs>
       <Grid container justify="space-between">
         <Grid
           item
@@ -92,36 +146,38 @@ const Header = (props) => {
             disableGutter
             titleVariant="h2"
           />
-          {post.author.node.firstName == "Jordan" ? (
-            <Avatar
-              alt={post.author.node.firstName}
-              src="/images/blog/author-jordan_pearce.png"
-              className={classes.sizeAvatar}
-            />
-          ) : (
-            <Avatar
-              alt={post.author.node.firstName}
-              src="/images/consultants/Stephen.png"
-              className={classes.sizeAvatar}
-            />
-          )}
           <Grid
             item
             container
             alignItems="center"
             xs={12}
             sm={12}
-            md={12}
-            lg={9}
-            xl={9}
+            md={6}
+            lg={6}
+            xl={6}
             data-aos={"fade-up"}
-            className={classes.authorGrid}
+            className={classes.title1}
           >
+            {post.author.node.firstName == "Jordan" ? (
+              <Avatar
+                alt={post.author.node.firstName}
+                src="/images/blog/author-jordan_pearce.png"
+                className={classes.sizeAvatar}
+              />
+            ) : (
+              <Avatar
+                alt={post.author.node.firstName}
+                src="/images/consultants/Stephen.png"
+                className={classes.sizeAvatar}
+              />
+            )}
             <p className={classes.author}>
               <strong>
                 by{" "}
                 {post.author.node.firstName + " " + post.author.node.lastName}{" "}
               </strong>
+              <br />
+              <small>last week | 7 min read</small>
             </p>
           </Grid>
           <Grid
@@ -130,32 +186,26 @@ const Header = (props) => {
             alignItems="center"
             xs={12}
             sm={12}
-            md={12}
-            lg={12}
-            xl={12}
+            md={6}
+            lg={6}
+            xl={6}
             data-aos={"fade-up"}
-          ></Grid>
+            className={classes.authorGrid}
+          >
+            {" "}
+            <p className={classes.author}>Share this article</p>
+          </Grid>
         </Grid>
-        <Grid
-          item
-          container
-          justify="flex-start"
-          xs={12}
-          md={4}
-          lg={4}
-          xl={4}
-          data-aos={"fade-up"}
-        ></Grid>
       </Grid>
     </div>
-  )
-}
+  );
+};
 
 Header.propTypes = {
   /**
    * External classes
    */
   className: PropTypes.string,
-}
+};
 
-export default Header
+export default Header;

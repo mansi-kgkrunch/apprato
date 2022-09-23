@@ -8,6 +8,7 @@
   "scripts": {
     "prettier": "prettier --write '**/*.{js,css,html}'",
     "start": "react-scripts start",
+    "deploy":"serve -s build",
     "build": "cross-env GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -59,6 +60,7 @@
     "react-scrollable-anchor": "^0.6.1",
     "react-text-truncate": "^0.17.0",
     "react-visibility-sensor": "^5.1.1",
+    "serve": "^14.0.1",
     "start": "^5.1.0",
     "validate.js": "^0.13.1"
   },
