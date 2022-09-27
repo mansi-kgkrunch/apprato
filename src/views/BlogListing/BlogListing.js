@@ -81,6 +81,8 @@ const useStyles = makeStyles((theme) => ({
   },
   RelatedPostsPaddingTop: {
     paddingTop: "14px",
+    paddingLeft: 0,
+    paddingRight: 0,
   },
   shape: {},
 }));

@@ -14,6 +14,7 @@ import {
   Team as TeamView,
   CaseStudies as CaseStudiesView,
   Contact as ContactView,
+  InnerPage as InnerPageView
 } from "./views"
 
 const Routes = () => {
@@ -67,6 +68,12 @@ const Routes = () => {
         layout={MinimalLayout}
         path="/contact"
       />
+      {/* <RouteWithLayout
+        component={InnerPageView}
+        exact
+        layout={MainLayout}
+        path="/innerpage"
+      /> */}
       <Redirect to="/not-found" status="404" />
     </Switch>
   )

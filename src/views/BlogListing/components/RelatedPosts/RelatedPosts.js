@@ -66,10 +66,10 @@ const useStyles = makeStyles((theme) => ({
     "& a": {
       textDecoration: "none",
     },
-    [theme.breakpoints.down("md")]: {
-      paddingLeft: "20px",
-      paddingRight: "20px",
-    },
+    // [theme.breakpoints.down("md")]: {
+    //   paddingLeft: "20px",
+    //   paddingRight: "20px",
+    // },
     [theme.breakpoints.down("sm")]: {
       paddingLeft: "20px",
       paddingRight: "20px",

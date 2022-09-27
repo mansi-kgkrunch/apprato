@@ -8,7 +8,7 @@
   "scripts": {
     "prettier": "prettier --write '**/*.{js,css,html}'",
     "start": "react-scripts start",
-    "deploy":"serve -s build",
+    "deploy": "serve -s build",
     "build": "cross-env GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -46,6 +46,7 @@
     "npm": "^6.14.7",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
+    "react-alice-carousel": "^2.6.4",
     "react-apollo": "^3.1.5",
     "react-countup": "^4.3.3",
     "react-dom": "^16.8.6",
