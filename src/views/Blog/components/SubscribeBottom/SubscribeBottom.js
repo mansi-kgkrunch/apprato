@@ -201,9 +201,6 @@ const useStyles = makeStyles((theme) => ({
     ".MuiInputLabel-formControl": {
       left: "8px !important",
     },
-    "& .MuiOutlinedInput-root .MuiInput-underline": {
-      borderColor: "green",
-    },
     [theme.breakpoints.down("sm")]: {
       width: "100%",
       marginRight: 0,

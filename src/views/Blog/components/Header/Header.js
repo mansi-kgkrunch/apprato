@@ -14,11 +14,11 @@ import SearchIcon from "@material-ui/icons/Search";
 const useStyles = makeStyles((theme) => ({
   root: {
     "& input": {
-      paddingLeft: "40px",
+      paddingLeft: "80px",
       paddingBottom: "20px",
       borderBottom: "2px solid #0e44ff",
       [theme.breakpoints.down("sm")]: {
-        paddingLeft: "34px",
+        paddingLeft: "60px",
       },
     },
     "& input::placeholder": {
@@ -39,9 +39,9 @@ const useStyles = makeStyles((theme) => ({
       textTransform: "capitalize",
       fontSize: "78px",
       marginBottom: "24px",
-      [theme.breakpoints.down("md")]: {
-        margin: "1.5em 0 0",
-      },
+      // [theme.breakpoints.down("md")]: {
+      //   margin: "1.5em 0 0",
+      // },
       [theme.breakpoints.down("sm")]: {
         textTransform: "capitalize",
         fontSize: "38px",
@@ -171,7 +171,7 @@ const Header = (props) => {
               className={classes.test}
               // label="Enter a city name"
               //variant="outlined"
-              placeholder="          What are you looking for ?"
+              placeholder="What are you looking for ?"
               size="large"
               style={{ width: "100%" }}
             />

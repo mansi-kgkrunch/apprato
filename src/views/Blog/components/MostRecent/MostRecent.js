@@ -28,16 +28,32 @@ const responsive = {
     partialVisibilityGutter: 0,
   },
   desktop: {
-    breakpoint: { max: 2880, min: 1024 },
+    breakpoint: { max: 2880, min: 1400 },
     items: 3,
     slidesToSlide: 2,
     partialVisibilityGutter: 0,
   },
+  // mobile: {
+  //   breakpoint: { max: 1024, min: 0 },
+  //   items: 1,
+  //   slidesToSlide: 1,
+  //   partialVisibilityGutter: 0,
+  // },
+  // desktop: {
+  //   breakpoint: { max: 3000, min: 1024 },
+  //   items: 3,
+  //   partialVisibilityGutter: 40 // this is needed to tell the amount of px that should be visible.
+  // },
+  tablet: {
+    breakpoint: { max: 1400, min: 786 },
+    items: 2,
+    slidesToSlide: 2,
+    partialVisibilityGutter: 30, // this is needed to tell the amount of px that should be visible.
+  },
   mobile: {
-    breakpoint: { max: 1024, min: 0 },
+    breakpoint: { max: 786, min: 0 },
     items: 1,
-    slidesToSlide: 1,
-    partialVisibilityGutter: 0,
+    partialVisibilityGutter: 30, // this is needed to tell the amount of px that should be visible.
   },
 };
 
@@ -53,14 +69,20 @@ const useStyles = makeStyles((theme) => ({
     "& h5": {
       fontSize: "44px",
       lineHeight: "normal",
+      textOverflow: "ellipsis",
+      overflow: "hidden",
+      display: "-webkit-box !important",
+      WebkitLineClamp: "2",
+      WebkitBoxOrient: "vertical",
+      whiteSpace: "normal",
       [theme.breakpoints.down("sm")]: {
-        fontSize: "22px",
+        fontSize: "25px",
         marginBottom: "20px",
       },
     },
     "& p": {
       color: "#000",
-      [theme.breakpoints.down("sm")]: {
+      [theme.breakpoints.down("xs")]: {
         WebkitLineClamp: "4",
         WebkitBoxOrient: "vertical",
         overflow: "hidden",
@@ -69,62 +91,17 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "18px",
         color: "#000",
       },
+      [theme.breakpoints.down("sm")]: {
+        display: "-webkit-box !important",
+        overflow: "hidden",
+        whiteSpace: "normal",
+        textOverflow: "ellipsis",
+        WebkitBoxOrient: "vertical",
+        WebkitLineClamp: "3",
+        fontSize: "18px",
+      },
     },
-    // [theme.breakpoints.down("sm")]: {
-    //   paddingBottom: "40px",
-    // },
   },
-  // imageroot: {
-  //   display: "block",
-  //   maxWidth: "100%",
-  //   flexBasis: "100%",
-  //   height: "100%",
-  //   objectFit: "cover",
-  //   position: "relative",
-  //   verticalAlign: "middle",
-  //   marginLeft: "auto !important",
-  //   "&:after": {
-  //     content: '""',
-  //     paddingBottom: "68.5%",
-  //     position: "relative",
-  //     display: "block",
-  //     width: "100%",
-  //   },
-  //   [theme.breakpoints.down("md")]: {
-  //     "&:after": {
-  //       paddingBottom: "90.5%",
-  //     },
-  //   },
-  //   [theme.breakpoints.down("xs")]: {
-  //     "&:after": {
-  //       paddingBottom: "90.5%",
-  //     },
-  //   },
-  //   [theme.breakpoints.down("sm")]: {
-  //     "&:after": {
-  //       paddingBottom: "90.5%",
-  //     },
-  //   },
-  // },
-  // images: {
-  //   width: "100%",
-  //   height: "100%",
-  //   position: "absolute",
-  //   top: "0",
-  //   right: "0",
-  //   left: "0",
-  //   bottom: "0",
-  //   objectFit: "cover",
-  //   objectPosition: "center",
-  //   display: "inline-block",
-  //   [theme.breakpoints.down("xs")]: {
-  //     borderRadius: "4px",
-  //   },
-  //   [theme.breakpoints.down("sm")]: {
-  //     borderRadius: "4px",
-  //   },
-  // },
-
   heading: {
     "& h5": {
       fontSize: "44px",
@@ -226,10 +203,13 @@ const useStyles = makeStyles((theme) => ({
   },
   carouselItem: {
     padding: "0 15px",
-    [theme.breakpoints.down("xs")]: {
-      padding: "0",
-    },
+    // [theme.breakpoints.down("xs")]: {
+    //   padding: "0",
+    // },
     [theme.breakpoints.down("sm")]: {
+      padding: "0 7.5px",
+    },
+    [theme.breakpoints.down("xs")]: {
       padding: "0",
     },
   },
@@ -275,8 +255,8 @@ const useStyles = makeStyles((theme) => ({
       paddingTop: "40px",
     },
     [theme.breakpoints.down("sm")]: {
-      paddingLeft: "20px",
-      paddingRight: "20px",
+      paddingLeft: "12.5px",
+      paddingRight: "12.5px",
       paddingBottom: "40px",
       paddingTop: "40px",
     },
@@ -308,6 +288,7 @@ const useStyles = makeStyles((theme) => ({
   cardContainer: {
     width: "100%",
     maxWidth: "100%",
+    display: "block",
     // padding: "0 8px",
     [theme.breakpoints.down("md")]: {
       padding: 0,
@@ -372,12 +353,11 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     padding: "0 8px",
     marginBottom: "35px",
-    [theme.breakpoints.down("md")]: {
-      alignItems: "center",
-      padding: "0",
+    [theme.breakpoints.down("sm")]: {
+      padding: "0 7.5px",
       marginBottom: "24px",
     },
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       alignItems: "center",
       padding: "0",
       marginBottom: "24px",
@@ -414,27 +394,114 @@ const useStyles = makeStyles((theme) => ({
 const MostRecent = (props) => {
   const { className, ...rest } = props;
   const classes = useStyles();
-  //   const GET_CATEGORY_POSTS = gql`
-  //     {
-  //       posts(where: { categoryName: "Uncategorized" }) {
-  //         nodes {
-  //           slug
-  //           title
-  //           uri
-  //           status
-  //           author {
-  //             node {
-  //               id
-  //               email
-  //             }
-  //           }
-  //         }
-  //       }
-  //     }
-  //   `;
+  const GET_POSTS = gql`
+    {
+      posts(where: { orderby: { field: DATE, order: DESC } }, first: 3) {
+        nodes {
+          title
+          uri
+          slug
+          date
+          content
+          date
+          featuredImage {
+            node {
+              id
+              mediaDetails {
+                file
+              }
+            }
+          }
+        }
+      }
+      pages {
+        nodes {
+          id
+        }
+      }
+    }
+  `;
 
-  //   const { loading, error, data } = useQuery(GET_CATEGORY_POSTS);
-  //   console.log(data.posts);
+  const { loading, error, data } = useQuery(GET_POSTS);
+  const MAX_LENGTH = 150;
+  if (loading) return <p>Loading Posts...</p>;
+  if (error) return <p>An error occured!</p>;
+  const rowMarkup = data.posts.nodes.map((item, index) => (
+    <Grid
+      id={item.title}
+      key={item.title}
+      position={index}
+      container
+      justify="flex-start"
+      xs={12}
+      md={4}
+      sm={4}
+      data-aos={"fade-up"}
+      className={classes.cardContainer}
+    >
+      <Link to={item.slug} className={classes.link}>
+        <Card
+          sx={{ maxWidth: 275 }}
+          variant="outlined"
+          className={classes.items}
+        >
+          <div className={classes.imgContainer}>
+            <CardMedia
+              className={classes.CardMedia}
+              component="img"
+              height="194"
+              image={
+                "https://backend.apprato.com.au/wp-content/uploads/" +
+                item.featuredImage.node.mediaDetails.file
+              }
+              alt={item.title}
+            />
+          </div>
+          <CardContent>
+            <Breadcrumbs
+              separator="|"
+              aria-label="breadcrumb"
+              className={classes.breadContainer}
+            >
+              <Link href="/" className={classes.breadcrumbsa}>
+                Development
+              </Link>
+              <Link href="/blog" className={classes.breadcrumbsa}>
+                Technology
+              </Link>
+              <Typography className={classes.breadcrumbTypography}>
+                UI
+              </Typography>
+            </Breadcrumbs>
+            <Typography gutterBottom variant="h5">
+              {item.title}
+            </Typography>
+            <Typography gutterBottom variant="body1" component="p">
+              {item.content.replace(/<[^>]+>/g, "").length > MAX_LENGTH
+                ? `${item.content
+                    .replace(/<[^>]+>/g, "")
+                    .substring(0, MAX_LENGTH)}...`
+                : ""}
+            </Typography>
+          </CardContent>
+          <CardActions disableSpacing className={classes.CardActions}>
+            <Breadcrumbs
+              separator="|"
+              aria-label="breadcrumb"
+              className={classes.breadcrumbsBottom}
+            >
+              <Link href="/" className={classes.a}>
+                last week
+              </Link>
+              <Link href="/blog" className={classes.a}>
+                7 min read
+              </Link>
+            </Breadcrumbs>
+          </CardActions>
+        </Card>
+      </Link>
+    </Grid>
+  ));
   return (
     <div
       className={clsx(classes.root, className)}
@@ -495,7 +562,8 @@ const MostRecent = (props) => {
           draggable={true}
           showDots={true}
           infinite={true}
-          autoPlay={false}
+          autoPlay={true}
+          autoPlaySpeed={5000}
           dotListClass={classes.carouselDot}
           // additionalTransfrom={-20 * 5}
           // animationType='fadeout'
@@ -514,278 +582,7 @@ const MostRecent = (props) => {
           mouseTracking={false}
           rewind={false}
         >
-          <Grid
-            container
-            justify="flex-start"
-            xs={12}
-            md={4}
-            sm={4}
-            data-aos={"fade-up"}
-            className={classes.cardContainer}
-          >
-            <Link to={`/blog}`} className={classes.link}>
-              <Card
-                sx={{ maxWidth: 275 }}
-                variant="outlined"
-                className={classes.items}
-              >
-                <div className={classes.imgContainer}>
-                  <CardMedia
-                    className={classes.CardMedia}
-                    component="img"
-                    height="194"
-                    image="/images/blog/header/upgrading_from_magento1.png"
-                    alt="Paella dish"
-                  />
-                </div>
-                <CardContent>
-                  <Breadcrumbs
-                    separator="|"
-                    aria-label="breadcrumb"
-                    className={classes.breadContainer}
-                  >
-                    <Link href="/" className={classes.breadcrumbsa}>
-                      Development
-                    </Link>
-                    <Link href="/blog" className={classes.breadcrumbsa}>
-                      Technology
-                    </Link>
-                    <Typography className={classes.breadcrumbTypography}>
-                      UI
-                    </Typography>
-                  </Breadcrumbs>
-                  <Typography gutterBottom variant="h5">
-                    How to hold an ipad correctly with both hands
-                  </Typography>
-                  <Typography gutterBottom variant="body1" component="p">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book
-                  </Typography>
-                </CardContent>
-                <CardActions disableSpacing className={classes.CardActions}>
-                  <Breadcrumbs
-                    separator="|"
-                    aria-label="breadcrumb"
-                    className={classes.breadcrumbsBottom}
-                  >
-                    <Link href="/" className={classes.a}>
-                      last week
-                    </Link>
-                    <Link href="/blog" className={classes.a}>
-                      7 min read
-                    </Link>
-                  </Breadcrumbs>
-                </CardActions>
-              </Card>
-            </Link>
-          </Grid>
-          <Grid
-            container
-            justify="flex-start"
-            xs={12}
-            md={4}
-            sm={4}
-            data-aos={"fade-up"}
-            className={classes.cardContainer}
-          >
-            <Link to={`/blog}`} className={classes.link}>
-              <Card
-                sx={{ maxWidth: "100%" }}
-                variant="outlined"
-                className={classes.items}
-              >
-                <div className={classes.imgContainer}>
-                  <CardMedia
-                    className={classes.CardMedia}
-                    component="img"
-                    height="194"
-                    image="/images/blog/header/custom_shipping_provider_integrations.png"
-                    alt="Paella dish"
-                  />
-                </div>
-                <CardContent>
-                  <Breadcrumbs
-                    separator="|"
-                    aria-label="breadcrumb"
-                    className={classes.breadContainer}
-                  >
-                    <Link href="/" className={classes.breadcrumbsa}>
-                      Development
-                    </Link>
-                    <Link href="/blog" className={classes.breadcrumbsa}>
-                      Technology
-                    </Link>
-                    <Typography className={classes.breadcrumbTypography}>
-                      UI
-                    </Typography>
-                  </Breadcrumbs>
-                  <Typography gutterBottom variant="h5">
-                    How to hold an ipad correctly with both hands
-                  </Typography>
-                  <Typography gutterBottom variant="body1" component="p">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book
-                  </Typography>
-                </CardContent>
-                <CardActions disableSpacing className={classes.CardActions}>
-                  <Breadcrumbs
-                    separator="|"
-                    aria-label="breadcrumb"
-                    className={classes.breadcrumbsBottom}
-                  >
-                    <Link href="/" className={classes.a}>
-                      last week
-                    </Link>
-                    <Link href="/blog" className={classes.a}>
-                      7 min read
-                    </Link>
-                  </Breadcrumbs>
-                </CardActions>
-              </Card>
-            </Link>
-          </Grid>
-          <Grid
-            container
-            justify="flex-start"
-            xs={12}
-            md={4}
-            sm={4}
-            data-aos={"fade-up"}
-            className={classes.cardContainer}
-          >
-            <Link to={`/blog}`} className={classes.link}>
-              <Card
-                sx={{ maxWidth: "100%" }}
-                variant="outlined"
-                className={classes.items}
-              >
-                <div className={classes.imgContainer}>
-                  <CardMedia
-                    className={classes.CardMedia}
-                    component="img"
-                    height="194"
-                    image="/images/blog/header/end_of_life-desktop.png"
-                    alt="Paella dish"
-                  />
-                </div>
-                <CardContent>
-                  <Breadcrumbs
-                    separator="|"
-                    aria-label="breadcrumb"
-                    className={classes.breadContainer}
-                  >
-                    <Link href="/" className={classes.breadcrumbsa}>
-                      Development
-                    </Link>
-                    <Link href="/blog" className={classes.breadcrumbsa}>
-                      Technology
-                    </Link>
-                    <Typography className={classes.breadcrumbTypography}>
-                      UI
-                    </Typography>
-                  </Breadcrumbs>
-                  <Typography gutterBottom variant="h5">
-                    How to hold an ipad correctly with both hands
-                  </Typography>
-                  <Typography gutterBottom variant="body1" component="p">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book
-                  </Typography>
-                </CardContent>
-                <CardActions disableSpacing className={classes.CardActions}>
-                  <Breadcrumbs
-                    separator="|"
-                    aria-label="breadcrumb"
-                    className={classes.breadcrumbsBottom}
-                  >
-                    <Link href="/" className={classes.a}>
-                      last week
-                    </Link>
-                    <Link href="/blog" className={classes.a}>
-                      7 min read
-                    </Link>
-                  </Breadcrumbs>
-                </CardActions>
-              </Card>
-            </Link>
-          </Grid>
-          <Grid
-            container
-            justify="flex-start"
-            xs={12}
-            md={4}
-            sm={4}
-            data-aos={"fade-up"}
-            className={classes.cardContainer}
-          >
-            <Link to={`/blog}`} className={classes.link}>
-              <Card
-                sx={{ maxWidth: 275 }}
-                variant="outlined"
-                className={classes.items}
-              >
-                <div className={classes.imgContainer}>
-                  <CardMedia
-                    className={classes.CardMedia}
-                    component="img"
-                    height="194"
-                    image="/images/blog/header/integrating_direct_freight_shipping_details.png"
-                    alt="Paella dish"
-                  />
-                </div>
-                <CardContent>
-                  <Breadcrumbs
-                    separator="|"
-                    aria-label="breadcrumb"
-                    className={classes.breadContainer}
-                  >
-                    <Link href="/" className={classes.breadcrumbsa}>
-                      Development
-                    </Link>
-                    <Link href="/blog" className={classes.breadcrumbsa}>
-                      Technology
-                    </Link>
-                    <Typography className={classes.breadcrumbTypography}>
-                      UI
-                    </Typography>
-                  </Breadcrumbs>
-                  <Typography gutterBottom variant="h5">
-                    How to hold an ipad correctly with both hands
-                  </Typography>
-                  <Typography gutterBottom variant="body1" component="p">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book
-                  </Typography>
-                </CardContent>
-                <CardActions disableSpacing className={classes.CardActions}>
-                  <Breadcrumbs
-                    separator="|"
-                    aria-label="breadcrumb"
-                    className={classes.breadcrumbsBottom}
-                  >
-                    <Link href="/" className={classes.a}>
-                      last week
-                    </Link>
-                    <Link href="/blog" className={classes.a}>
-                      7 min read
-                    </Link>
-                  </Breadcrumbs>
-                </CardActions>
-              </Card>
-            </Link>
-          </Grid>
+          {rowMarkup}
         </Carousel>
         {/* </Grid>
         </Grid> */}

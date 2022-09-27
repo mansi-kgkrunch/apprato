@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles ,createMuiTheme } from "@material-ui/core/styles";
 import { Section } from "components/organisms";
 import {
   Header,
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: "120px",
     paddingBottom: "80px",
     backgroundColor: "hsl(230deg 30% 96%)",
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       paddingLeft: "10px",
       paddingRight: "10px",
       paddingBottom: "20px",
@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(3),
     paddingLeft: 0,
     paddingRight: 0,
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("lg")]: {
       paddingTop: theme.spacing(5),
     },
   },

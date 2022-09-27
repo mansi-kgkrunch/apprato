@@ -28,13 +28,19 @@ const responsive = {
     partialVisibilityGutter: 0,
   },
   desktop: {
-    breakpoint: { max: 2880, min: 1024 },
+    breakpoint: { max: 2880, min: 1400 },
     items: 2,
     slidesToSlide: 2,
     partialVisibilityGutter: 0,
   },
+  tablet: {
+    breakpoint: { max: 1400, min: 786 },
+    items: 2,
+    slidesToSlide: 2,
+    partialVisibilityGutter: 30, // this is needed to tell the amount of px that should be visible.
+  },
   mobile: {
-    breakpoint: { max: 1024, min: 0 },
+    breakpoint: { max: 786, min: 0 },
     items: 1,
     slidesToSlide: 1,
     partialVisibilityGutter: 0,
@@ -239,10 +245,15 @@ const useStyles = makeStyles((theme) => ({
   },
   carouselItem: {
     padding: "0 15px",
-    [theme.breakpoints.down("xs")]: {
-      padding: "0",
-    },
+
+    // [theme.breakpoints.down("xs")]: {
+    //   padding: "0",
+    // },
+
     [theme.breakpoints.down("sm")]: {
+      padding: "0 7.5px",
+    },
+    [theme.breakpoints.down("xs")]: {
       padding: "0",
     },
   },
@@ -257,9 +268,9 @@ const useStyles = makeStyles((theme) => ({
     //   },
     // },
   },
-  // slider:{
-  //   paddingBottom: "0",
-  // },
+  slider: {
+    paddingBottom: "0",
+  },
   subTitle: {
     marginLeft: "24px",
     [theme.breakpoints.down("xs")]: {
@@ -276,20 +287,17 @@ const useStyles = makeStyles((theme) => ({
       background: "#3377ff",
       borderColor: "#3377ff",
     },
-    [theme.breakpoints.up("xs")]: {
+    [theme.breakpoints.down("xs")]: {
       display: "flex",
       justifyContent: "end",
       position: "absolute",
       bottom: "10px",
     },
-    [theme.breakpoints.up("lg")]: {
+    [theme.breakpoints.down("lg")]: {
       display: "none",
     },
     [theme.breakpoints.down("sm")]: {
-      display: "flex",
-      justifyContent: "center",
-      position: "absolute",
-      bottom: "10px",
+      display: "none",
     },
   },
   expertbox: {
@@ -305,8 +313,8 @@ const useStyles = makeStyles((theme) => ({
       paddingTop: "40px",
     },
     [theme.breakpoints.down("sm")]: {
-      paddingLeft: "20px",
-      paddingRight: "20px",
+      paddingLeft: "12.5px",
+      paddingRight: "12.5px",
       // paddingBottom: "40px",
       paddingTop: "40px",
     },
@@ -402,14 +410,14 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     padding: "0 8px",
     marginBottom: "35px",
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("xs")]: {
       alignItems: "center",
       padding: "0",
       marginBottom: "24px",
     },
     [theme.breakpoints.down("sm")]: {
       alignItems: "center",
-      padding: "0",
+      padding: "0 7.5px",
       marginBottom: "24px",
     },
   },
@@ -522,10 +530,11 @@ const Featured = (props) => {
           <Grid container spacing={3}> */}
         <Carousel
           swipeable={true}
-          draggable={false}
+          draggable={true}
           showDots={true}
           infinite={true}
-          autoPlay={false}
+          // autoPlay={true}
+          // autoPlaySpeed={5000}
           dotListClass={classes.carouselDot}
           keyBoardControl={true}
           transitionDuration={500}
@@ -533,7 +542,7 @@ const Featured = (props) => {
           responsive={responsive}
           centerMode={false}
           ssr={false}
-          // sliderClass={slider}
+          sliderClass={classes.slider}
           containerClass={classes.CarouselSlider}
           itemClass={classes.carouselItem}
           partialVisible={false}

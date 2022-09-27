@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
       },
     },
     "& h5": {
-      [theme.breakpoints.down("sm")]: {
+      [theme.breakpoints.down("xs")]: {
         fontSize: "15px",
       },
       marginBottom: "20px",
@@ -136,7 +136,7 @@ const useStyles = makeStyles((theme) => ({
   },
   subtitle: {
     fontSize: "18px",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       display: "none",
     },
   },
