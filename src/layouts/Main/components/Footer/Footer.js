@@ -1,30 +1,30 @@
-import React from "react";
-import PropTypes from "prop-types";
-import clsx from "clsx";
-import { makeStyles } from "@material-ui/core/styles";
-import { List, ListItem } from "@material-ui/core";
-import { Grid, Typography, Divider } from "@material-ui/core";
-import { LearnMoreLink, Image } from "components/atoms";
-import { SectionHeader } from "components/molecules";
+import React from 'react'
+import PropTypes from 'prop-types'
+import clsx from 'clsx'
+import { makeStyles } from '@material-ui/core/styles'
+import { List, ListItem } from '@material-ui/core'
+import { Grid, Typography, Divider } from '@material-ui/core'
+import { LearnMoreLink, Image } from 'components/atoms'
+import { SectionHeader } from 'components/molecules'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    color: "#fff",
-    "& h6 a": { color: "#fff", textDecoration: "none" },
+    color: '#fff',
+    '& h6 a': { color: '#fff', textDecoration: 'none' },
     padding: theme.spacing(1, 0),
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up('md')]: {
       padding: theme.spacing(5, 0),
     },
   },
   footerContainer: {
     maxWidth: theme.layout.contentWidth,
-    width: "100%",
-    margin: "0 auto",
+    width: '100%',
+    margin: '0 auto',
     padding: theme.spacing(30, 0, 0),
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down('md')]: {
       padding: theme.spacing(10, 0, 0),
     },
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up('md')]: {
       padding: theme.spacing(15, 0, 0),
     },
   },
@@ -32,101 +32,101 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: 0,
   },
   logoContainer: {
-    width: "33em",
-    height: "auto",
-    margin: "9.375em 0 6.25em",
-    [theme.breakpoints.down("lg")]: {
-      width: "15em",
-      margin: "4.5em 0 3.5em",
+    width: '33em',
+    height: 'auto',
+    margin: '9.375em 0 6.25em',
+    [theme.breakpoints.down('lg')]: {
+      width: '15em',
+      margin: '4.5em 0 3.5em',
     },
-    [theme.breakpoints.down("sm")]: {
-      width: "75%",
-      margin: "2.5em 0 1em",
+    [theme.breakpoints.down('sm')]: {
+      width: '75%',
+      margin: '2.5em 0 1em',
     },
   },
   logoImage: {
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
   },
   socialIcon: {
     padding: 0,
     marginRight: theme.spacing(1),
-    color: "rgba(255,255,255,.6)",
-    "&:hover": {
-      background: "transparent",
+    color: 'rgba(255,255,255,.6)',
+    '&:hover': {
+      background: 'transparent',
     },
-    "&:last-child": {
+    '&:last-child': {
       marginRight: 0,
     },
   },
   devider: {
-    background: "#8998c0",
-    marginBottom: "50px",
+    background: '#8998c0',
+    marginBottom: '50px',
   },
   sociallink: {
-    float: "right",
-    display: "inline-block",
-    paddingLeft: "35px",
-    fontSize: "2.5em",
-    color: "#0e43f2",
-    [theme.breakpoints.down("lg")]: {
-      fontSize: "1.25em",
+    float: 'right',
+    display: 'inline-block',
+    paddingLeft: '35px',
+    fontSize: '2.5em',
+    color: '#0e43f2',
+    [theme.breakpoints.down('lg')]: {
+      fontSize: '1.25em',
     },
-    [theme.breakpoints.down("sm")]: {
-      float: "left",
-      paddingLeft: "0",
+    [theme.breakpoints.down('sm')]: {
+      float: 'left',
+      paddingLeft: '0',
       // padding: "0 1.5em 1em",
     },
   },
   toptitle: {
-    marginBottom: "2.5rem",
+    marginBottom: '2.5rem',
   },
   submsg: {
-    fontSize: "2.625rem",
-    [theme.breakpoints.down("lg")]: {
-      fontSize: "1.5rem",
+    fontSize: '2.625rem',
+    [theme.breakpoints.down('lg')]: {
+      fontSize: '1.5rem',
     },
-    [theme.breakpoints.down("md")]: {
-      fontSize: "1.25rem",
+    [theme.breakpoints.down('md')]: {
+      fontSize: '1.25rem',
     },
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "1rem",
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1rem',
     },
   },
   learnmore: {
-    margin: "5rem 0",
-    [theme.breakpoints.down("lg")]: {
-      margin: "2rem 0",
+    margin: '5rem 0',
+    [theme.breakpoints.down('lg')]: {
+      margin: '2rem 0',
     },
   },
   address: {
-    fontSize: "2.25rem",
-    [theme.breakpoints.down("lg")]: {
-      fontSize: "1.75rem",
+    fontSize: '2.25rem',
+    [theme.breakpoints.down('lg')]: {
+      fontSize: '1.75rem',
     },
-    [theme.breakpoints.down("md")]: {
-      fontSize: "1.25rem",
+    [theme.breakpoints.down('md')]: {
+      fontSize: '1.25rem',
     },
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "1rem",
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1rem',
     },
   },
   copy: {
-    fontSize: "1.875rem",
-    marginBottom: "1em",
-    [theme.breakpoints.down("lg")]: {
-      fontSize: "1.25rem",
+    fontSize: '1.875rem',
+    marginBottom: '1em',
+    [theme.breakpoints.down('lg')]: {
+      fontSize: '1.25rem',
     },
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "0.9rem",
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '0.9rem',
     },
   },
-}));
+}))
 
 const Footer = (props) => {
-  const { className, ...rest } = props;
+  const { className, ...rest } = props
 
-  const classes = useStyles();
+  const classes = useStyles()
 
   return (
     <div {...rest} className={clsx(classes.root, className)} name="contact">
@@ -247,11 +247,11 @@ const Footer = (props) => {
         </Typography>
       </div>
     </div>
-  );
-};
+  )
+}
 
 Footer.propTypes = {
   className: PropTypes.string,
-};
+}
 
-export default Footer;
+export default Footer

@@ -74,6 +74,23 @@ const useStyles = makeStyles((theme) => ({
       paddingLeft: "20px",
       paddingRight: "20px",
     },
+    "& h6": {
+      // margin: "1.5em 0",
+      fontSize: "32px",
+      fontWeight: 700,
+      [theme.breakpoints.down("xs")]: {
+        // margin: "1em 0 0",
+        fontSize: "24px !important",
+      },
+      [theme.breakpoints.down("sm")]: {
+        // margin: "1em 0 0",
+        fontSize: "26px !important",
+      },
+      [theme.breakpoints.down("md")]: {
+        // margin: "1em 0 0",
+        fontSize: "28px",
+      },
+    },
   },
   items: {
     backgroundColor: "#FFFFFF",
@@ -84,14 +101,24 @@ const useStyles = makeStyles((theme) => ({
   },
   cardContainer: {
     padding: "0 8px",
-    [theme.breakpoints.down("md")]: {
-      padding: 0,
+    // [theme.breakpoints.down("md")]: {
+    //   flexGrow: "0",
+    //   maxWidth: "49%",
+    //   flexBasis: "49%",
+    // },
+    [theme.breakpoints.down("xs")]: {
       marginBottom: "30px",
-      justifyContent: "center !important",
+      // justifyContent: "center !important",
+      flexGrow: "0",
+      maxWidth: "100% !important",
+      flexBasis: "100% !important",
     },
     [theme.breakpoints.down("sm")]: {
-      marginBottom: "30px",
-      justifyContent: "center !important",
+      flexGrow: "0",
+      padding: 0,
+      marginBottom: "15px",
+      maxWidth: "49%",
+      flexBasis: "49%",
     },
   },
   heading: {
@@ -103,12 +130,13 @@ const useStyles = makeStyles((theme) => ({
         margin: "1em 0 0",
       },
     },
-    "& h6": {
-      margin: "1.5em 0",
-      [theme.breakpoints.down("sm")]: {
-        margin: "1em 0 0",
-      },
-    },
+    // "& h6": {
+    //   fontWeight: 700,
+    //   margin: "1.5em 0",
+    //   [theme.breakpoints.down("sm")]: {
+    //     margin: "1em 0 0",
+    //   },
+    // },
     [theme.breakpoints.up("xs")]: {
       paddingRight: "3rem",
       paddingBottom: "3rem",
@@ -142,7 +170,7 @@ const useStyles = makeStyles((theme) => ({
   },
   reversemob: {
     [theme.breakpoints.down("sm")]: {
-      flexDirection: "column-reverse",
+      flexDirection: "row",
     },
   },
   categories: {
@@ -169,7 +197,18 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "600",
     marginBottom: "0",
   },
-  link: {},
+  link: {
+    width: "100%",
+    "& :hover": {
+      background: "#f2f3f8",
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "100%",
+    },
+    // [theme.breakpoints.down("s")]: {
+    //   width: "100%",
+    // },
+  },
   titleContainer: {
     alignItems: "center",
     padding: "0 8px",
@@ -348,7 +387,7 @@ const RelatedPosts = (props) => {
                   </Link>
                   <Typography color="text.primary">UI</Typography>
                 </Breadcrumbs>
-                <Typography gutterBottom variant="h6" component="div">
+                <Typography gutterBottom variant="h6">
                   How to hold an ipad correctly with both hands
                 </Typography>
               </CardContent>
@@ -410,7 +449,7 @@ const RelatedPosts = (props) => {
                   </Link>
                   <Typography color="text.primary">UI</Typography>
                 </Breadcrumbs>
-                <Typography gutterBottom variant="h6" component="div">
+                <Typography gutterBottom variant="h6">
                   How to hold an ipad correctly with both hands
                 </Typography>
               </CardContent>
@@ -446,7 +485,7 @@ const RelatedPosts = (props) => {
             <Card
               sx={{ maxWidth: 345 }}
               variant="outlined"
-              className={classes.card}
+              className={classes.items}
             >
               <div className={classes.imgContainer}>
                 <CardMedia
@@ -472,7 +511,7 @@ const RelatedPosts = (props) => {
                   </Link>
                   <Typography color="text.primary">UI</Typography>
                 </Breadcrumbs>
-                <Typography gutterBottom variant="h6" component="div">
+                <Typography gutterBottom variant="h6">
                   How to hold an ipad correctly with both hands
                 </Typography>
               </CardContent>
@@ -493,64 +532,6 @@ const RelatedPosts = (props) => {
             </Card>
           </Link>
         </Grid>
-        {/* <Grid
-          item
-          container
-          justify="flex-start"
-          xs={12}
-          md={4}
-          lg={4}
-          xl={4}
-          data-aos={"fade-up"}
-          className={classes.cardContainer}
-        >
-          <Link to={`/blog}`} className={classes.link}>
-            <Card
-              sx={{ maxWidth: 345 }}
-              variant="outlined"
-              className={classes.card}
-            >
-              <div className={classes.imgContainer}>
-                <CardMedia
-                  className={classes.CardMedia}
-                  component="img"
-                  height="194"
-                  image="/images/72 Dpi/case studies/Aquila image.jpg"
-                  alt="Paella dish"
-                />
-              </div>
-
-              <CardContent>
-                <Breadcrumbs
-                  separator="|"
-                  aria-label="breadcrumb"
-                  className={classes.breadContainer}
-                >
-                  <Link href="/" className={classes.breadcrumbsa}>
-                    Development
-                  </Link>
-                  <Link href="/blog" className={classes.breadcrumbsa}>
-                    Technology
-                  </Link>
-                  <Typography color="text.primary">UI</Typography>
-                </Breadcrumbs>
-                <Typography gutterBottom variant="h6" component="div">
-                  How to hold an ipad correctly with both hands
-                </Typography>
-              </CardContent>
-              <CardActions disableSpacing className={classes.CardActions}>
-                <Breadcrumbs
-                  separator="|"
-                  aria-label="breadcrumb"
-                  className={classes.breadcrumbs}
-                >
-                  <Link href="/">last week</Link>
-                  <Link href="/blog">7 min read</Link>
-                </Breadcrumbs>
-              </CardActions>
-            </Card>
-          </Link>
-        </Grid> */}
       </Grid>
     </div>
   );
