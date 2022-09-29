@@ -247,7 +247,7 @@ const Work = (props) => {
               className={classes.imageroot}
             >
               <img
-                src="/images/72 Dpi/case studies/Aquila image.jpg"
+                src="/images/72Dpi/case_studies/Aquila_image.jpg"
                 alt=""
                 className={classes.images}
                 data-aos-easing="ease-out-cubic"
@@ -280,7 +280,7 @@ const Work = (props) => {
               className={classes.imageroot}
             >
               <img
-                src="/images/72 Dpi/case studies/Farm2 Market graphic.jpg"
+                src="/images/72Dpi/case_studies/Farm2_Market_graphic.jpg"
                 alt=""
                 data-aos-easing="ease-out-cubic"
                 data-aos-duration="2000"
