@@ -11,16 +11,16 @@ import {
   ListItem,
   Typography,
   IconButton,
-  Button
+  Button,
 } from "@material-ui/core";
-import { Link as LinkHref } from "react-router-dom";
+import { Link as LinkHref, useLocation } from "react-router-dom";
 
 import { Image } from "components/atoms";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {},
   flexGrow: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   navigationContainer: {
     display: "flex",
@@ -28,8 +28,8 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
     padding: theme.spacing(0, 0, "0px"),
     [theme.breakpoints.down("lg")]: {
-      padding: theme.spacing(0, 0, "0px")
-    }
+      padding: theme.spacing(0, 0, "0px"),
+    },
   },
   toolbar: {
     position: "absolute",
@@ -38,23 +38,23 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     [theme.breakpoints.down("lg")]: {
       //padding: theme.spacing(0, 12, 20)
-      padding: "0px 120px"
+      padding: "0px 120px",
     },
     [theme.breakpoints.down("sm")]: {
       // padding: theme.spacing(0, 0, 12)
       padding: "0px 20px",
-      paddingTop: "15px"
-    }
+      paddingTop: "15px",
+    },
   },
   listItem: {
     cursor: "pointer",
     padding: "0 1.875rem",
     [theme.breakpoints.down("lg")]: {
-      padding: "0 1.2rem"
+      padding: "0 1.2rem",
     },
     [theme.breakpoints.down("md")]: {
-      padding: "0 1rem"
-    }
+      padding: "0 1rem",
+    },
   },
   listItemText: {
     flex: "0 0 auto",
@@ -62,12 +62,12 @@ const useStyles = makeStyles(theme => ({
     textDecoration: "none !important",
     fontSize: "2rem",
     [theme.breakpoints.down("lg")]: {
-      fontSize: "1.5rem"
+      fontSize: "1.5rem",
     },
     [theme.breakpoints.down("md")]: {
-      fontSize: "1rem"
+      fontSize: "1rem",
     },
-    color: "#0e44ff"
+    color: "#0e44ff",
   },
   listItemTextHome: {
     flex: "0 0 auto",
@@ -75,12 +75,12 @@ const useStyles = makeStyles(theme => ({
     textDecoration: "none !important",
     fontSize: "2rem",
     [theme.breakpoints.down("lg")]: {
-      fontSize: "1.5rem"
+      fontSize: "1.5rem",
     },
     [theme.breakpoints.down("md")]: {
-      fontSize: "1rem"
+      fontSize: "1rem",
     },
-    color: "#fff"
+    color: "#fff",
   },
   listItemButtonHome: {
     whiteSpace: "nowrap",
@@ -93,13 +93,13 @@ const useStyles = makeStyles(theme => ({
     border: "2px solid white",
     [theme.breakpoints.down("lg")]: {
       fontSize: "1.5rem",
-      minWidth: "10rem"
+      minWidth: "10rem",
     },
     [theme.breakpoints.down("md")]: {
       fontSize: "1rem",
-      minWidth: "8rem"
+      minWidth: "8rem",
     },
-    textTransform: "initial"
+    textTransform: "initial",
   },
   listItemButton: {
     whiteSpace: "nowrap",
@@ -112,39 +112,41 @@ const useStyles = makeStyles(theme => ({
     border: "2px solid white",
     [theme.breakpoints.down("lg")]: {
       fontSize: "1.5rem",
-      minWidth: "10rem"
+      minWidth: "10rem",
     },
     [theme.breakpoints.down("md")]: {
       fontSize: "1rem",
-      minWidth: "8rem"
+      minWidth: "8rem",
     },
     textTransform: "initial",
-    color: "#0e44ff"
+    color: "#0e44ff",
   },
   iconButton: {
     padding: 0,
     "&:hover": {
-      background: "transparent"
+      background: "transparent",
     },
     [theme.breakpoints.down("md")]: {
-      justifyContent: "end"
-    }
+      justifyContent: "end",
+    },
   },
   logoContainer: {
     width: "32.375rem",
     height: "auto",
     [theme.breakpoints.down("md")]: {
-      width: "18.75rem"
-    }
-  }
+      width: "18.75rem",
+    },
+  },
 }));
 
-const Topbar = props => {
+const Topbar = (props) => {
   const { onSidebarOpen, ...rest } = props;
 
   const classes = useStyles();
   const page = window.location.pathname;
   const HomePage = page.length;
+
+  const { pathname } = useLocation();
 
   return (
     <Toolbar
@@ -155,8 +157,8 @@ const Topbar = props => {
       <Grid container justify="space-between">
         <Grid item container xs={8} md={4} lg={3} xl={3} data-aos={"fade-up"}>
           <div className={classes.logoContainer}>
-            <a href="/" title="thefront">
-              {HomePage === 1 ? (
+            <LinkHref to="/" title="thefront">
+              {pathname === "/" ? (
                 <Image
                   className={classes.logoImage}
                   src="/images/Apprato_Logo_white.png"
@@ -171,7 +173,7 @@ const Topbar = props => {
                   lazy={false}
                 />
               )}
-            </a>
+            </LinkHref>
           </div>
         </Grid>
         <Grid
@@ -192,7 +194,7 @@ const Topbar = props => {
                     variant="body1"
                     color="textPrimary"
                     className={
-                      HomePage === 1
+                      pathname === "/"
                         ? classes.listItemTextHome
                         : classes.listItemText
                     }
@@ -207,7 +209,7 @@ const Topbar = props => {
                     variant="body1"
                     color="textSecondary"
                     className={
-                      HomePage === 1
+                      pathname === "/"
                         ? classes.listItemTextHome
                         : classes.listItemText
                     }
@@ -222,7 +224,7 @@ const Topbar = props => {
                     variant="body1"
                     color="textSecondary"
                     className={
-                      HomePage === 1
+                      pathname === "/"
                         ? classes.listItemTextHome
                         : classes.listItemText
                     }
@@ -240,7 +242,7 @@ const Topbar = props => {
                     variant="body1"
                     color="textSecondary"
                     className={
-                      HomePage === 1
+                      pathname === "/"
                         ? classes.listItemTextHome
                         : classes.listItemText
                     }
@@ -255,7 +257,7 @@ const Topbar = props => {
                     variant="body1"
                     color="textSecondary"
                     className={
-                      HomePage === 1
+                      pathname === "/"
                         ? classes.listItemTextHome
                         : classes.listItemText
                     }
@@ -270,7 +272,7 @@ const Topbar = props => {
                     variant="body1"
                     color="textSecondary"
                     className={
-                      HomePage === 1
+                      pathname === "/"
                         ? classes.listItemTextHome
                         : classes.listItemText
                     }
@@ -298,7 +300,7 @@ const Topbar = props => {
               variant="contained"
               color="primary"
               className={
-                HomePage === 1
+                pathname === "/"
                   ? classes.listItemButtonHome
                   : classes.listItemButton
               }
@@ -314,7 +316,7 @@ const Topbar = props => {
               onClick={onSidebarOpen}
               aria-label="Menu"
             >
-              {HomePage === 1 ? (
+              {pathname === "/" ? (
                 <img src="../images/mobilenav.png" alt="" />
               ) : (
                 <img src="../images/Hamburger_Menu.png" alt="" />
@@ -329,7 +331,7 @@ const Topbar = props => {
 };
 
 Topbar.propTypes = {
-  onSidebarOpen: PropTypes.func
+  onSidebarOpen: PropTypes.func,
 };
 
 export default Topbar;

@@ -34,45 +34,45 @@ ReactGA.initialize(TRACKING_ID)
 
 const browserHistory = createBrowserHistory()
 
-browserHistory.listen((location) => {
-  const hash = window.location.hash
+// browserHistory.listen((location) => {
+//   const hash = window.location.hash
 
-  // Use setTimeout to make sure this runs after React Router's own listener
-  setTimeout(() => {
-    // Keep default behavior of restoring scroll position when user:
-    // - clicked back button
-    // - clicked on a link that programmatically calls `history.goBack()`
-    // - manually changed the URL in the address bar (here we might want
-    // to scroll to top, but we can't differentiate it from the others)
-    if (window.location.action === "POP") {
-      return
-    }
-    // In all other cases, scroll to top
-    window.scrollTo(0, 0)
+//   // Use setTimeout to make sure this runs after React Router's own listener
+//   setTimeout(() => {
+//     // Keep default behavior of restoring scroll position when user:
+//     // - clicked back button
+//     // - clicked on a link that programmatically calls `history.goBack()`
+//     // - manually changed the URL in the address bar (here we might want
+//     // to scroll to top, but we can't differentiate it from the others)
+//     if (window.location.action === "POP") {
+//       return
+//     }
+//     // In all other cases, scroll to top
+//     window.scrollTo(0, 0)
 
-    // Scroll to from other pages to home page ids
-    if (window.location.hash) {
-      // Fragment exists
-      setTimeout(() => {
-        const id = hash.replace("#", "")
-        const element = document.getElementById(id)
-        const options = {
-          behavior: "smooth",
-          duration: 2300,
-        }
-        if (element) {
-          element.scrollIntoView(options)
-        }
-      }, 1500)
-    } else {
-      // Issue with Safari subscribe form not loading on /blog pages when hitting the back button, so just refresh the browser in this case.
-      if (window.location.href.indexOf("blog") > -1) {
-        //alert("..")
-        window.location.reload(false)
-      }
-    }
-  })
-})
+//     // Scroll to from other pages to home page ids
+//     if (window.location.hash) {
+//       // Fragment exists
+//       setTimeout(() => {
+//         const id = hash.replace("#", "")
+//         const element = document.getElementById(id)
+//         const options = {
+//           behavior: "smooth",
+//           duration: 2300,
+//         }
+//         if (element) {
+//           element.scrollIntoView(options)
+//         }
+//       }, 1500)
+//     } else {
+//       // Issue with Safari subscribe form not loading on /blog pages when hitting the back button, so just refresh the browser in this case.
+//       if (window.location.href.indexOf("blog") > -1) {
+//         //alert("..")
+//         window.location.reload(false)
+//       }
+//     }
+//   })
+// })
 
 const App = () => {
   AOS.init({
