@@ -92,36 +92,43 @@ const BlogListing = () => {
   const location = useLocation();
   var path = location.pathname.slice(1);
 
-  const GET_POST = gql`
-    {
-      post(
-        id: "${path}"
-        idType: SLUG
-      ) {
-        title
-        featuredImage {
-          node {
-            id
-            link
-            mediaDetails {
-              file
-            }
+  const GET_POST = gql`{
+    post(
+      id: "${path}"
+      idType: SLUG
+    ) {
+      title
+      featuredImage {
+        node {
+          id
+          link
+          mediaDetails {
+            file
           }
         }
-        author {
+      }
+      author {
+        node {
+          firstName
+          lastName
+          name
+        }
+      }
+      uri
+      slug
+      date
+      content
+      categories(first: 1) {
+        edges {
           node {
-            firstName
-            lastName
+            id
+            slug
             name
           }
         }
-        uri
-        slug
-        date
-        content
       }
     }
-  `;
+  }`;
 
   const { loading, error, data } = useQuery(GET_POST);
 

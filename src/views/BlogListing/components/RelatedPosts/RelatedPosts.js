@@ -15,6 +15,7 @@ import { gql } from "graphql-tag";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import TextTruncate from "react-text-truncate";
 import { Link } from "react-router-dom";
+// import { empty } from "apollo-boost";
 
 const GET_POSTS = gql`
   {
@@ -65,6 +66,9 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: "112px",
     "& a": {
       textDecoration: "none",
+      "& :hover": {
+        textDecoration: "none",
+      },
     },
     // [theme.breakpoints.down("md")]: {
     //   paddingLeft: "20px",
@@ -79,16 +83,30 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "32px",
       fontWeight: 700,
       [theme.breakpoints.down("xs")]: {
-        // margin: "1em 0 0",
         fontSize: "24px !important",
+        // WebkitLineClamp: "4",
+        // WebkitBoxOrient: "vertical",
+        // overflow: "hidden",
+        // textOverflow: "ellipsis",
+        // display: "-webkit-box",
       },
       [theme.breakpoints.down("sm")]: {
-        // margin: "1em 0 0",
         fontSize: "26px !important",
+        // display: "-webkit-box !important",
+        // overflow: "hidden",
+        // whiteSpace: "normal",
+        // textOverflow: "ellipsis",
+        // WebkitBoxOrient: "vertical",
+        // WebkitLineClamp: "3",
       },
       [theme.breakpoints.down("md")]: {
-        // margin: "1em 0 0",
         fontSize: "28px",
+        display: "-webkit-box !important",
+        overflow: "hidden",
+        whiteSpace: "normal",
+        textOverflow: "ellipsis",
+        WebkitBoxOrient: "vertical",
+        WebkitLineClamp: "2",
       },
     },
   },
@@ -288,9 +306,41 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const RelatedPosts = (props) => {
+  const GET_POSTS = gql`
+  {
+    posts(where: {categoryName: "${props.post.categories.edges[0].node.name}"}, first: 3) {
+      nodes {
+        title
+        uri
+        slug
+        date
+        content
+        date
+        featuredImage {
+          node {
+            id
+            mediaDetails {
+              file
+            }
+          }
+        }
+      }
+    }
+    pages {
+      nodes {
+        id
+      }
+    }
+  }
+`;
+
+  // console.log(props.post.categories.edges[0].node.name ,"dfg");
+
   const { className, ...rest } = props;
   const classes = useStyles();
   const { loading, error, data } = useQuery(GET_POSTS);
+  console.log(data , "dgds");
+  const MAX_LENGTH = 200;
   if (loading) return <p>Loading Posts...</p>;
   if (error) return <p>An error occured!</p>;
 
@@ -302,7 +352,76 @@ const RelatedPosts = (props) => {
   //     tmp.innerHTML = str
   //     return tmp.textContent || tmp.innerText || ""
   //   }
-
+  const rowMarkup = data.posts.nodes.map((item, index) => (
+    <Grid
+      id={item.title}
+      key={item.title}
+      position={index}
+      item
+      container
+      justify="flex-start"
+      xs={12}
+      md={4}
+      lg={4}
+      xl={4}
+      data-aos={"fade-up"}
+      className={classes.cardContainer}
+    >
+      <Link to={item.slug} className={classes.link}>
+        <Card
+          sx={{ maxWidth: 345 }}
+          variant="outlined"
+          className={classes.items}
+        >
+          <div className={classes.imgContainer}>
+            <CardMedia
+              className={classes.CardMedia}
+              component="img"
+              height="194"
+              image={
+                "https://backend.apprato.com.au/wp-content/uploads/" +
+                item.featuredImage.node.mediaDetails.file
+              }
+              alt="Paella dish"
+            />
+          </div>
+          <CardContent>
+            <Breadcrumbs
+              separator="|"
+              aria-label="breadcrumb"
+              className={classes.breadContainer}
+            >
+              <Link href="/" className={classes.breadcrumbsa}>
+                Development
+              </Link>
+              <Link href="/blog" className={classes.breadcrumbsa}>
+                Technology
+              </Link>
+              <Typography color="text.primary">UI</Typography>
+            </Breadcrumbs>
+            <Typography gutterBottom variant="h6">
+              {item.title}
+            </Typography>
+            {/* {item.content.replace(/<[^>]+>/g, '').length > MAX_LENGTH ?(`${item.content.replace(/<[^>]+>/g, '').substring(0, MAX_LENGTH)}...`):''} */}
+          </CardContent>
+          <CardActions disableSpacing className={classes.CardActions}>
+            <Breadcrumbs
+              separator="|"
+              aria-label="breadcrumb"
+              className={classes.breadcrumbs}
+            >
+              <Link href="/" className={classes.a}>
+                last week
+              </Link>
+              <Link href="/blog" className={classes.a}>
+                7 min read
+              </Link>
+            </Breadcrumbs>
+          </CardActions>
+        </Card>
+      </Link>
+    </Grid>
+  ));
   return (
     <div className={clsx(classes.root)} {...rest}>
       <Grid container xs={12} className={classes.titleContainer}>
@@ -346,192 +465,7 @@ const RelatedPosts = (props) => {
         </Grid>
       </Grid>
       <Grid container justify="space-between" className={classes.reversemob}>
-        <Grid
-          item
-          container
-          justify="flex-start"
-          xs={12}
-          md={4}
-          lg={4}
-          xl={4}
-          data-aos={"fade-up"}
-          className={classes.cardContainer}
-        >
-          <Link to={`/blog}`} className={classes.link}>
-            <Card
-              sx={{ maxWidth: 345 }}
-              variant="outlined"
-              className={classes.items}
-            >
-              <div className={classes.imgContainer}>
-                <CardMedia
-                  className={classes.CardMedia}
-                  component="img"
-                  height="194"
-                  image="/images/72 Dpi/case studies/Aquila image.jpg"
-                  alt="Paella dish"
-                />
-              </div>
-
-              <CardContent>
-                <Breadcrumbs
-                  separator="|"
-                  aria-label="breadcrumb"
-                  className={classes.breadContainer}
-                >
-                  <Link href="/" className={classes.breadcrumbsa}>
-                    Development
-                  </Link>
-                  <Link href="/blog" className={classes.breadcrumbsa}>
-                    Technology
-                  </Link>
-                  <Typography color="text.primary">UI</Typography>
-                </Breadcrumbs>
-                <Typography gutterBottom variant="h6">
-                  How to hold an ipad correctly with both hands
-                </Typography>
-              </CardContent>
-              <CardActions disableSpacing className={classes.CardActions}>
-                <Breadcrumbs
-                  separator="|"
-                  aria-label="breadcrumb"
-                  className={classes.breadcrumbs}
-                >
-                  <Link href="/" className={classes.a}>
-                    last week
-                  </Link>
-                  <Link href="/blog" className={classes.a}>
-                    7 min read
-                  </Link>
-                </Breadcrumbs>
-              </CardActions>
-            </Card>
-          </Link>
-        </Grid>
-        <Grid
-          item
-          container
-          justify="flex-start"
-          xs={12}
-          md={4}
-          lg={4}
-          xl={4}
-          data-aos={"fade-up"}
-          className={classes.cardContainer}
-        >
-          <Link to={`/blog}`} className={classes.link}>
-            <Card
-              sx={{ maxWidth: 345 }}
-              variant="outlined"
-              className={classes.items}
-            >
-              <div className={classes.imgContainer}>
-                <CardMedia
-                  className={classes.CardMedia}
-                  component="img"
-                  height="194"
-                  image="/images/72 Dpi/case studies/Aquila image.jpg"
-                  alt="Paella dish"
-                />
-              </div>
-
-              <CardContent>
-                <Breadcrumbs
-                  separator="|"
-                  aria-label="breadcrumb"
-                  className={classes.breadContainer}
-                >
-                  <Link href="/" className={classes.breadcrumbsa}>
-                    Development
-                  </Link>
-                  <Link href="/blog" className={classes.breadcrumbsa}>
-                    Technology
-                  </Link>
-                  <Typography color="text.primary">UI</Typography>
-                </Breadcrumbs>
-                <Typography gutterBottom variant="h6">
-                  How to hold an ipad correctly with both hands
-                </Typography>
-              </CardContent>
-              <CardActions disableSpacing className={classes.CardActions}>
-                <Breadcrumbs
-                  separator="|"
-                  aria-label="breadcrumb"
-                  className={classes.breadcrumbs}
-                >
-                  <Link href="/" className={classes.a}>
-                    last week
-                  </Link>
-                  <Link href="/blog" className={classes.a}>
-                    7 min read
-                  </Link>
-                </Breadcrumbs>
-              </CardActions>
-            </Card>
-          </Link>
-        </Grid>
-        <Grid
-          item
-          container
-          justify="flex-start"
-          xs={12}
-          md={4}
-          lg={4}
-          xl={4}
-          data-aos={"fade-up"}
-          className={classes.cardContainer}
-        >
-          <Link to={`/blog}`} className={classes.link}>
-            <Card
-              sx={{ maxWidth: 345 }}
-              variant="outlined"
-              className={classes.items}
-            >
-              <div className={classes.imgContainer}>
-                <CardMedia
-                  className={classes.CardMedia}
-                  component="img"
-                  height="194"
-                  image="/images/72 Dpi/case studies/Aquila image.jpg"
-                  alt="Paella dish"
-                />
-              </div>
-
-              <CardContent>
-                <Breadcrumbs
-                  separator="|"
-                  aria-label="breadcrumb"
-                  className={classes.breadContainer}
-                >
-                  <Link href="/" className={classes.breadcrumbsa}>
-                    Development
-                  </Link>
-                  <Link href="/blog" className={classes.breadcrumbsa}>
-                    Technology
-                  </Link>
-                  <Typography color="text.primary">UI</Typography>
-                </Breadcrumbs>
-                <Typography gutterBottom variant="h6">
-                  How to hold an ipad correctly with both hands
-                </Typography>
-              </CardContent>
-              <CardActions disableSpacing className={classes.CardActions}>
-                <Breadcrumbs
-                  separator="|"
-                  aria-label="breadcrumb"
-                  className={classes.breadcrumbs}
-                >
-                  <Link href="/" className={classes.a}>
-                    last week
-                  </Link>
-                  <Link href="/blog" className={classes.a}>
-                    7 min read
-                  </Link>
-                </Breadcrumbs>
-              </CardActions>
-            </Card>
-          </Link>
-        </Grid>
+        {rowMarkup}
       </Grid>
     </div>
   );
