@@ -154,10 +154,9 @@ const Categories = (props) => {
 
   return (
     <div className={clsx(classes.root, className)} {...rest}>
-      <Grid container justify="space-between">
+      <Grid container justifyContent="space-between" alignItems="center">
         <Grid
           item
-          alignItems="center"
           xs={12}
           md={4}
           lg={4}
@@ -170,7 +169,7 @@ const Categories = (props) => {
               <CardContent className={classes.cardContent}>
                 <Typography
                   sx={{ fontSize: 14 }}
-                  color="text.secondary"
+                  //color="text.secondary"
                   gutterBottom
                 ></Typography>
                 <img
@@ -181,7 +180,7 @@ const Categories = (props) => {
                 <Typography variant="h5">Upgrading</Typography>
                 <Typography
                   sx={{ mb: 1.5 }}
-                  color="text.secondary"
+                  // color="text.secondary"
                 ></Typography>
                 <Typography variant="body2" className={classes.subtitle}>
                   We can architect a robust and scaleable backend solution,
@@ -211,7 +210,7 @@ const Categories = (props) => {
               <CardContent className={classes.cardContent}>
                 <Typography
                   sx={{ fontSize: 14 }}
-                  color="text.secondary"
+                  //color="text.secondary"
                   gutterBottom
                 ></Typography>
                 <img
@@ -222,7 +221,7 @@ const Categories = (props) => {
                 <Typography variant="h5">Shipping</Typography>
                 <Typography
                   sx={{ mb: 1.5 }}
-                  color="text.secondary"
+                  //color="text.secondary"
                 ></Typography>
                 <Typography variant="body2" className={classes.subtitle}>
                   We can architect a robust and scaleable backend solution,
@@ -253,7 +252,7 @@ const Categories = (props) => {
               <CardContent className={classes.cardContent}>
                 <Typography
                   sx={{ fontSize: 14 }}
-                  color="text.secondary"
+                  // color="text.secondary"
                   gutterBottom
                 ></Typography>
                 <img
@@ -264,7 +263,7 @@ const Categories = (props) => {
                 <Typography variant="h5">Payment</Typography>
                 <Typography
                   sx={{ mb: 1.5 }}
-                  color="text.secondary"
+                  // color="text.secondary"
                 ></Typography>
                 <Typography variant="body2" className={classes.subtitle}>
                   We can architect a robust and scaleable backend solution,
@@ -295,7 +294,7 @@ const Categories = (props) => {
               <CardContent className={classes.cardContent}>
                 <Typography
                   sx={{ fontSize: 14 }}
-                  color="text.secondary"
+                  // color="text.secondary"
                   gutterBottom
                 ></Typography>
                 <img
@@ -306,7 +305,7 @@ const Categories = (props) => {
                 <Typography variant="h5">Customisation</Typography>
                 <Typography
                   sx={{ mb: 1.5 }}
-                  color="text.secondary"
+                  // color="text.secondary"
                 ></Typography>
                 <Typography variant="body2" className={classes.subtitle}>
                   We can architect a robust and scaleable backend solution,
@@ -337,7 +336,7 @@ const Categories = (props) => {
               <CardContent className={classes.cardContent}>
                 <Typography
                   sx={{ fontSize: 14 }}
-                  color="text.secondary"
+                  // color="text.secondary"
                   gutterBottom
                 ></Typography>
                 <img
@@ -348,7 +347,7 @@ const Categories = (props) => {
                 <Typography variant="h5">Design</Typography>
                 <Typography
                   sx={{ mb: 1.5 }}
-                  color="text.secondary"
+                  // color="text.secondary"
                 ></Typography>
                 <Typography variant="body2" className={classes.subtitle}>
                   We can architect a robust and scaleable backend solution,
@@ -379,7 +378,7 @@ const Categories = (props) => {
               <CardContent className={classes.cardContent}>
                 <Typography
                   sx={{ fontSize: 14 }}
-                  color="text.secondary"
+                  //  color="text.secondary"
                   gutterBottom
                 ></Typography>
                 <img
@@ -390,7 +389,7 @@ const Categories = (props) => {
                 <Typography variant="h5">Startups</Typography>
                 <Typography
                   sx={{ mb: 1.5 }}
-                  color="text.secondary"
+                  // color="text.secondary"
                 ></Typography>
                 <Typography variant="body2" className={classes.subtitle}>
                   We can architect a robust and scaleable backend solution,

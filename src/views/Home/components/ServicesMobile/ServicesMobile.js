@@ -87,10 +87,16 @@ const useStyles = makeStyles(theme => ({
   },
   accordian: {
     color: "white",
-    backgroundColor: "unset",
-    "&:before": {
-      backgroundColor: "#091d35"
-    }
+    backgroundColor: "unset"
+    // "&::before": {
+    //   backgroundColor: "#0290d8"
+    // },
+    // "&::after": {
+    //   backgroundColor: "#0290d8"
+    // },
+    // "& .Mui-expanded:after": {
+    //   backgroundColor: "#0290d8"
+    // }
   },
   accordionDetail: {
     flexDirection: "column"
@@ -112,7 +118,7 @@ const ServicesMobile = props => {
       id="serviceMobile"
       className={classes.serviceMobile}
     >
-      <Typography variant="h1" style={{ color: "#fff" }}>
+      <Typography variant="h1" style={{ color: "#fff", paddingBottom: "30px" }}>
         Our Services.
       </Typography>
       <Grid container justify="space-between">
@@ -122,7 +128,7 @@ const ServicesMobile = props => {
           className={classes.accordian}
         >
           <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-            <Typography>_Strategy</Typography>
+            <Typography>Strategy</Typography>
           </AccordionSummary>
           <AccordionDetails className={classes.accordionDetail}>
             <Typography>

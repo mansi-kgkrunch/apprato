@@ -428,6 +428,7 @@ const MostRecent = (props) => {
   if (error) return <p>An error occured!</p>;
   const rowMarkup = data.posts.nodes.map((item, index) => (
     <Grid
+      item
       id={item.title}
       key={item.title}
       position={index}
@@ -463,12 +464,16 @@ const MostRecent = (props) => {
               aria-label="breadcrumb"
               className={classes.breadContainer}
             >
-              <Link href="/" className={classes.breadcrumbsa}>
+              {/* <Link href="/" className={classes.breadcrumbsa}> */}
+              <Typography className={classes.breadcrumbsa}>
                 Development
-              </Link>
-              <Link href="/blog" className={classes.breadcrumbsa}>
+              </Typography>
+              {/* </Link> */}
+              {/* <Link href="/blog" className={classes.breadcrumbsa}> */}
+              <Typography className={classes.breadcrumbsa}>
                 Technology
-              </Link>
+              </Typography>
+              {/* </Link> */}
               <Typography className={classes.breadcrumbTypography}>
                 UI
               </Typography>
@@ -490,12 +495,15 @@ const MostRecent = (props) => {
               aria-label="breadcrumb"
               className={classes.breadcrumbsBottom}
             >
-              <Link href="/" className={classes.a}>
+              <Typography className={classes.a}>
+                {/* </Typography><Link href="/" className={classes.a}> */}
                 last week
-              </Link>
-              <Link href="/blog" className={classes.a}>
+              </Typography>
+              {/* </Link> */}
+              <Typography className={classes.a}>7 min read</Typography>
+              {/* <Link href="/blog" className={classes.a}>
                 7 min read
-              </Link>
+              </Link> */}
             </Breadcrumbs>
           </CardActions>
         </Card>
@@ -511,6 +519,7 @@ const MostRecent = (props) => {
     >
       <div className={classes.expertbox}>
         <Grid
+          item
           container
           justify="space-between"
           xs={12}
@@ -549,7 +558,7 @@ const MostRecent = (props) => {
               gutterBottom
               className={classes.consultantTitle}
             >
-              <Link href="/" className={classes.title2}>
+              <Link to="/" className={classes.title2}>
                 See all
               </Link>
             </Typography>

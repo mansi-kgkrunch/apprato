@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles ,createMuiTheme } from "@material-ui/core/styles";
+import { makeStyles, createMuiTheme } from "@material-ui/core/styles";
 import { Section } from "components/organisms";
 import {
   Header,
@@ -94,9 +94,9 @@ const Blog = () => {
         </Section>
       </Grid>
 
-      <Section className={classes.pageFeaturedPaddingTop}>
+      {/* <Section className={classes.pageFeaturedPaddingTop}>
         <Featured />
-      </Section>
+      </Section> */}
       <Section className={classes.pageMostRecentPaddingTop}>
         <MostRecent />
       </Section>

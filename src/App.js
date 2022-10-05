@@ -1,23 +1,23 @@
-import React, {useEffect} from "react"
+import React, { useEffect } from "react";
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
   useQuery,
   gql,
-} from "@apollo/client"
-import {Router, useLocation, useHistory} from "react-router-dom"
-import {createBrowserHistory} from "history"
-import {ThemeProvider} from "@material-ui/core/styles"
-import {Paper, CssBaseline} from "@material-ui/core"
-import AOS from "aos"
+} from "@apollo/client";
+import { Router, useLocation, useHistory } from "react-router-dom";
+import { createBrowserHistory } from "history";
+import { ThemeProvider } from "@material-ui/core/styles";
+import { Paper, CssBaseline } from "@material-ui/core";
+import AOS from "aos";
 
-import theme from "./theme"
-import Routes from "./Routes"
+import theme from "./theme";
+import Routes from "./Routes";
 
-import "./theme/AktivGrotesk/fonts.css"
-import "react-lazy-load-image-component/src/effects/opacity.css"
-import "aos/dist/aos.css"
+import "./theme/AktivGrotesk/fonts.css";
+import "react-lazy-load-image-component/src/effects/opacity.css";
+import "aos/dist/aos.css";
 
 /* Google Tag Manager
 import TagManager from "react-gtm-module"
@@ -28,11 +28,11 @@ TagManager.initialize(tagManagerArgs)
 */
 
 // Set up Google Analytics inside our project, GA needs to be initialized. This needs to be done before any of the other tracking functions will record any data.
-import ReactGA from "react-ga"
-const TRACKING_ID = "G-3SNKMGKWLV" // OUR_TRACKING_ID
-ReactGA.initialize(TRACKING_ID)
+import ReactGA from "react-ga";
+const TRACKING_ID = "G-3SNKMGKWLV"; // OUR_TRACKING_ID
+ReactGA.initialize(TRACKING_ID);
 
-const browserHistory = createBrowserHistory()
+const browserHistory = createBrowserHistory();
 
 // browserHistory.listen((location) => {
 //   const hash = window.location.hash
@@ -80,16 +80,23 @@ const App = () => {
     delay: 50,
     duration: 500,
     easing: "ease-in-out",
-  })
+  });
 
   const client = new ApolloClient({
     uri: "https://backend.apprato.com.au/graphql",
     cache: new InMemoryCache(),
-  })
-
+  });
+  // const client = new ApolloClient({
+  //   uri: "http://localhost/apprato/graphql",
+  //   cache: new InMemoryCache(),
+  // });
+  // const client = new ApolloClient({
+  //   uri: "http://backend.apprato.com.au/graphql",
+  //   cache: new InMemoryCache(),
+  // });
   useEffect(() => {
-    ReactGA.pageview(window.location.pathname + window.location.search)
-  }, [])
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
 
   return (
     <ApolloProvider client={client}>
@@ -103,7 +110,7 @@ const App = () => {
         </Paper>
       </ThemeProvider>
     </ApolloProvider>
-  )
-}
+  );
+};
 
-export default App
+export default App;

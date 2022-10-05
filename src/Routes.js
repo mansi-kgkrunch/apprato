@@ -1,8 +1,8 @@
-import React from "react"
-import {Switch, Redirect} from "react-router-dom"
+import React from "react";
+import { Switch, Redirect } from "react-router-dom";
 
-import {RouteWithLayout} from "./common"
-import {Main as MainLayout, Minimal as MinimalLayout} from "./layouts"
+import { RouteWithLayout } from "./common";
+import { Main as MainLayout, Minimal as MinimalLayout } from "./layouts";
 
 import {
   Home as HomeView,
@@ -14,8 +14,7 @@ import {
   Team as TeamView,
   CaseStudies as CaseStudiesView,
   Contact as ContactView,
-  InnerPage as InnerPageView
-} from "./views"
+} from "./views";
 
 const Routes = () => {
   return (
@@ -26,6 +25,18 @@ const Routes = () => {
         layout={MainLayout}
         path="/"
       />
+      <RouteWithLayout
+        component={ServicesView}
+        exact
+        layout={MainLayout}
+        path="/services/:category"
+      />
+      {/* <RouteWithLayout
+        component={StrategyView}
+        exact
+        layout={MainLayout}
+        path="/strategy"
+      /> */}
       <RouteWithLayout
         component={BlogView}
         exact
@@ -45,12 +56,6 @@ const Routes = () => {
         path="/:slug"
       />
       <RouteWithLayout
-        component={ServicesView}
-        exact
-        layout={MinimalLayout}
-        path="/services"
-      />
-      <RouteWithLayout
         component={TeamView}
         exact
         layout={MinimalLayout}
@@ -59,8 +64,8 @@ const Routes = () => {
       <RouteWithLayout
         component={CaseStudiesView}
         exact
-        layout={MinimalLayout}
-        path="/case-studies"
+        layout={MainLayout}
+        path="/case-studies/:category"
       />
       <RouteWithLayout
         component={ContactView}
@@ -68,15 +73,10 @@ const Routes = () => {
         layout={MinimalLayout}
         path="/contact"
       />
-      {/* <RouteWithLayout
-        component={InnerPageView}
-        exact
-        layout={MainLayout}
-        path="/innerpage"
-      /> */}
+
       <Redirect to="/not-found" status="404" />
     </Switch>
-  )
-}
+  );
+};
 
-export default Routes
+export default Routes;

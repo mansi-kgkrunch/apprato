@@ -31,6 +31,15 @@ const useStyles = makeStyles((theme) => ({
       borderBottom: "2px solid #0e44ff !important",
     },
   },
+  messageForm: {
+    color: "#0e44ff",
+    paddingLeft: "120px",
+    paddingRight: "120px",
+    [theme.breakpoints.down("sm")]: {
+      paddingLeft: "20px",
+      paddingRight: "20px",
+    },
+  },
   kgSendMessageButton: {
     color: "#0e44ff",
     padding: "0 30px",
@@ -98,7 +107,7 @@ const useStyles = makeStyles((theme) => ({
       width: "100%",
     },
   },
-  messageForm: {
+  messageForms: {
     paddingLeft: "90px",
     paddingRight: "90px",
     [theme.breakpoints.down("sm")]: {
@@ -119,7 +128,7 @@ const MessageForm = (props) => {
       name="messageForm"
       id="messageForm"
     >
-      <Grid container justify="space-between" className={classes.messageForm}>
+      <Grid container justify="space-between" className={classes.messageForms}>
         <Grid item md={8} sx={12} className={classes.title}>
           <Typography variant="h4">
             Ready to grow your on-line business?
@@ -132,50 +141,61 @@ const MessageForm = (props) => {
               <TextField
                 id="standard-required"
                 label="First name*"
-                placeholder="Placeholder"
+                placeholder="First name"
                 multiline
                 className={classes.textfiled}
+                // InputProps={{ classes }}
               />
               <TextField
                 id="standard-required"
                 label="Last name*"
-                placeholder="Placeholder"
+                placeholder="Last name"
                 multiline
                 className={classes.textfiled}
+                // style={{ marginRight: "60px", width: "26%" }}
               />
               <TextField
                 id="standard-required"
                 label="Company name*"
-                placeholder="Placeholder"
+                placeholder="Company name"
                 multiline
                 className={classes.textfiled}
+                // style={{ marginRight: "60px", width: "26%" }}
               />
             </div>
             <div className={classes.div}>
               <TextField
                 id="standard-required"
                 label="Email*"
-                placeholder="Placeholder"
+                placeholder="Email"
                 multiline
                 className={classes.textfiled}
+                // style={{ marginRight: "60px", width: "26%" }}
               />
               <TextField
                 id="standard-required"
                 label="Telephone number (optional)"
-                placeholder="Placeholder"
+                placeholder="Telephone number"
                 multiline
                 className={classes.textfiled}
+                // style={{ marginRight: "60px", width: "26%" }}
               />
               <TextField
                 id="standard-required"
                 label="Project details (optional)"
-                placeholder="Placeholder"
+                placeholder="Project details"
                 multiline
                 className={classes.textfiled}
+                // style={{ marginRight: "60px", width: "26%" }}
               />
             </div>
             <div className={classes.kgSendMessageButton}>
-              <Button className={classes.messageButton}>send message</Button>
+              <Button
+                className={classes.messageButton}
+                style={{ width: "202px" }}
+              >
+                send message
+              </Button>
             </div>
           </Box>
         </Grid>

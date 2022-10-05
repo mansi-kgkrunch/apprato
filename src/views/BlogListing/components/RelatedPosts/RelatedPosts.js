@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
-import { Breadcrumbs, Grid } from "@material-ui/core";
+import { Breadcrumbs, Grid, Link } from "@material-ui/core";
 import { SectionHeader } from "components/molecules";
 import Box from "@material-ui/core/Box";
 import Card from "@material-ui/core/Card";
@@ -14,7 +14,7 @@ import Typography from "@material-ui/core/Typography";
 import { gql } from "graphql-tag";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import TextTruncate from "react-text-truncate";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 // import { empty } from "apollo-boost";
 
 const GET_POSTS = gql`
@@ -66,9 +66,6 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: "112px",
     "& a": {
       textDecoration: "none",
-      "& :hover": {
-        textDecoration: "none",
-      },
     },
     // [theme.breakpoints.down("md")]: {
     //   paddingLeft: "20px",
@@ -107,6 +104,15 @@ const useStyles = makeStyles((theme) => ({
         textOverflow: "ellipsis",
         WebkitBoxOrient: "vertical",
         WebkitLineClamp: "2",
+      },
+      [theme.breakpoints.down("lg")]: {
+        fontSize: "28px",
+        display: "-webkit-box !important",
+        overflow: "hidden",
+        whiteSpace: "normal",
+        textOverflow: "ellipsis",
+        WebkitBoxOrient: "vertical",
+        WebkitLineClamp: "1",
       },
     },
   },
@@ -210,10 +216,21 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       fontSize: "14px",
     },
+    [theme.breakpoints.down("lg")]: {
+      fontSize: "1rem",
+    },
   },
   title1: {
     fontWeight: "600",
+
     marginBottom: "0",
+    [theme.breakpoints.down("lg")]: {
+      fontSize: "2rem",
+      padding: "0 8px",
+    },
+    [theme.breakpoints.down("md")]: {
+      padding: 0,
+    },
   },
   link: {
     width: "100%",
@@ -229,12 +246,13 @@ const useStyles = makeStyles((theme) => ({
   },
   titleContainer: {
     alignItems: "center",
-    padding: "0 8px",
+    // padding: "0 8px",
     marginBottom: "35px",
     [theme.breakpoints.down("md")]: {
       alignItems: "center",
       padding: "0",
       marginBottom: "24px",
+      padding: "0 8px",
     },
     [theme.breakpoints.down("sm")]: {
       alignItems: "center",
@@ -339,7 +357,6 @@ const RelatedPosts = (props) => {
   const { className, ...rest } = props;
   const classes = useStyles();
   const { loading, error, data } = useQuery(GET_POSTS);
-  console.log(data , "dgds");
   const MAX_LENGTH = 200;
   if (loading) return <p>Loading Posts...</p>;
   if (error) return <p>An error occured!</p>;
@@ -458,7 +475,7 @@ const RelatedPosts = (props) => {
             gutterBottom
             className={classes.typography}
           >
-            <Link href="/" className={classes.title2}>
+            <Link href="/blog" className={classes.title2}>
               See all
             </Link>
           </Typography>

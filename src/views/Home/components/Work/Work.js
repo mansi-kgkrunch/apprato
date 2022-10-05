@@ -12,23 +12,23 @@ const responsive = {
     breakpoint: { max: 10000, min: 2880 },
     items: 2,
     slidesToSlide: 2,
-    partialVisibilityGutter: 0,
+    partialVisibilityGutter: 0
   },
   desktop: {
     breakpoint: { max: 2880, min: 1024 },
     items: 2,
     slidesToSlide: 2,
-    partialVisibilityGutter: 0,
+    partialVisibilityGutter: 0
   },
   mobile: {
     breakpoint: { max: 1024, min: 0 },
     items: 1,
     slidesToSlide: 1,
-    partialVisibilityGutter: 0,
-  },
+    partialVisibilityGutter: 0
+  }
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {},
   imageroot: {
     display: "block",
@@ -44,23 +44,23 @@ const useStyles = makeStyles((theme) => ({
       paddingBottom: "68.5%",
       position: "relative",
       display: "block",
-      width: "100%",
+      width: "100%"
     },
     [theme.breakpoints.down("md")]: {
       "&:after": {
-        paddingBottom: "90.5%",
-      },
+        paddingBottom: "90.5%"
+      }
     },
     [theme.breakpoints.down("xs")]: {
       "&:after": {
-        paddingBottom: "90.5%",
-      },
+        paddingBottom: "90.5%"
+      }
     },
     [theme.breakpoints.down("sm")]: {
       "&:after": {
-        paddingBottom: "90.5%",
-      },
-    },
+        paddingBottom: "90.5%"
+      }
+    }
   },
   images: {
     width: "100%",
@@ -74,52 +74,52 @@ const useStyles = makeStyles((theme) => ({
     objectPosition: "center",
     display: "inline-block",
     [theme.breakpoints.down("xs")]: {
-      borderRadius: "4px",
+      borderRadius: "4px"
     },
     [theme.breakpoints.down("sm")]: {
-      borderRadius: "4px",
-    },
+      borderRadius: "4px"
+    }
   },
   titleContainer: {
     margin: "0",
     paddingTop: "20px",
     alignItems: "center",
     [theme.breakpoints.down("xs")]: {
-      textTransform: "uppercase",
+      textTransform: "uppercase"
     },
     [theme.breakpoints.down("sm")]: {
-      textTransform: "uppercase",
-    },
+      textTransform: "uppercase"
+    }
   },
   consultantTitle: {
     paddingBottom: "20px",
     paddingLeft: "15px",
     [theme.breakpoints.down("xs")]: {
       paddingBottom: "20px",
-      paddingLeft: "0",
+      paddingLeft: "0"
     },
     [theme.breakpoints.down("sm")]: {
       paddingBottom: "20px",
-      paddingLeft: "0",
-    },
+      paddingLeft: "0"
+    }
   },
   carouselItem: {
     padding: "0 15px",
     [theme.breakpoints.down("xs")]: {
-      padding: "0",
+      padding: "0"
     },
     [theme.breakpoints.down("sm")]: {
-      padding: "0",
-    },
+      padding: "0"
+    }
   },
   CarouselSlider: {
-    paddingBottom: "0",
+    paddingBottom: "0"
   },
   subTitle: {
     marginLeft: "24px",
     [theme.breakpoints.down("xs")]: {
-      marginLeft: "14px",
-    },
+      marginLeft: "14px"
+    }
   },
   carouselDot: {
     display: "none",
@@ -127,17 +127,17 @@ const useStyles = makeStyles((theme) => ({
       display: "flex",
       justifyContent: "end",
       position: "absolute",
-      bottom: "10px",
+      bottom: "10px"
     },
     [theme.breakpoints.up("lg")]: {
-      display: "none",
+      display: "none"
     },
     [theme.breakpoints.down("sm")]: {
       display: "flex",
       justifyContent: "end",
       position: "absolute",
-      bottom: "10px",
-    },
+      bottom: "10px"
+    }
   },
   expertbox: {
     background: "#4b69d6",
@@ -149,13 +149,13 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("xs")]: {
       paddingLeft: "20px",
       paddingRight: "20px",
-      backgroundColor: "#1948e8",
+      backgroundColor: "#1948e8"
     },
     [theme.breakpoints.down("sm")]: {
       paddingLeft: "20px",
       paddingRight: "20px",
-      backgroundColor: "#1948e8",
-    },
+      backgroundColor: "#1948e8"
+    }
   },
   button: {
     borderRadius: "0",
@@ -166,21 +166,21 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "transparent",
     marginTop: "34px",
     [theme.breakpoints.down("xs")]: {
-      padding: "6px 8px",
+      padding: "6px 8px"
     },
     [theme.breakpoints.down("sm")]: {
-      padding: "6px 8px",
-    },
+      padding: "6px 8px"
+    }
   },
   buttonContainer: {
     marginTop: "34px",
     [theme.breakpoints.down("xs")]: {
-      justifyContent: "end",
+      justifyContent: "end"
     },
     [theme.breakpoints.down("sm")]: {
-      justifyContent: "end",
-    },
-  },
+      justifyContent: "end"
+    }
+  }
   // image: {
   //   padding: 0,
   //   textAlign: "center",
@@ -195,7 +195,7 @@ const useStyles = makeStyles((theme) => ({
   // )
 }));
 
-const Work = (props) => {
+const Work = props => {
   const { className, ...rest } = props;
   const classes = useStyles();
 
@@ -221,7 +221,8 @@ const Work = (props) => {
           draggable={true}
           showDots={true}
           infinite={true}
-          autoPlay={false}
+          autoPlay={true}
+          autoPlaySpeed={5000}
           dotListClass={classes.carouselDot}
           keyBoardControl={true}
           transitionDuration={500}
@@ -247,7 +248,7 @@ const Work = (props) => {
               className={classes.imageroot}
             >
               <img
-                src="/images/72Dpi/case_studies/Aquila_image.jpg"
+                src="/images/72 Dpi/case studies/Aquila Image.jpg"
                 alt=""
                 className={classes.images}
                 data-aos-easing="ease-out-cubic"
@@ -280,7 +281,7 @@ const Work = (props) => {
               className={classes.imageroot}
             >
               <img
-                src="/images/72Dpi/case_studies/Farm2_Market_graphic.jpg"
+                src="/images/72 Dpi/case studies/Farm2 Market graphic.jpg"
                 alt=""
                 data-aos-easing="ease-out-cubic"
                 data-aos-duration="2000"
@@ -310,9 +311,8 @@ const Work = (props) => {
         <Grid container className={classes.buttonContainer} justify="center">
           <Button
             variant="outlined"
-            type
             className={classes.button}
-            style={{ backgroundColor: "transparent" }}
+            style={{ backgroundColor: "transparent" , width:"202px"}}
             href="#outlined-buttons"
           >
             View Our Work
@@ -327,7 +327,7 @@ Work.propTypes = {
   /**
    * External classes
    */
-  className: PropTypes.string,
+  className: PropTypes.string
 };
 
 export default Work;

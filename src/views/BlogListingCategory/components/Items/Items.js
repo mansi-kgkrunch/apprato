@@ -1,29 +1,29 @@
-import React from "react"
-import PropTypes from "prop-types"
-import clsx from "clsx"
-import {makeStyles} from "@material-ui/core/styles"
-import {Grid} from "@material-ui/core"
-import {SectionHeader} from "components/molecules"
-import Box from "@material-ui/core/Box"
-import Card from "@material-ui/core/Card"
-import CardMedia from "@material-ui/core/CardMedia"
-import CardActions from "@material-ui/core/CardActions"
-import CardContent from "@material-ui/core/CardContent"
-import Button from "@material-ui/core/Button"
-import Typography from "@material-ui/core/Typography"
-import {gql} from "graphql-tag"
-import {useQuery, useMutation} from "@apollo/react-hooks"
-import TextTruncate from "react-text-truncate"
-import {Link} from "react-router-dom"
+import React from "react";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import { makeStyles } from "@material-ui/core/styles";
+import { Grid } from "@material-ui/core";
+import { SectionHeader } from "components/molecules";
+import Box from "@material-ui/core/Box";
+import Card from "@material-ui/core/Card";
+import CardMedia from "@material-ui/core/CardMedia";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import { gql } from "graphql-tag";
+import { useQuery, useMutation } from "@apollo/react-hooks";
+import TextTruncate from "react-text-truncate";
+import { Link } from "react-router-dom";
 
 const bull = (
   <Box
     component="span"
-    sx={{display: "inline-block", mx: "2px", transform: "scale(0.8)"}}
+    sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
   >
     •
   </Box>
-)
+);
 
 const classes = {
   root: {
@@ -35,7 +35,7 @@ const classes = {
     color: "blue",
     fontFamily: "Roboto",
   },
-}
+};
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -108,19 +108,19 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#000000",
     },
   },
-}))
+}));
 
 const Items = (props) => {
-  const {className, ...rest} = props
-  const classes = useStyles()
+  const { className, ...rest } = props;
+  const classes = useStyles();
 
   //              <CardMedia component="img" height="140" image="" alt="" />
-  const posts = props.post.nodes
+  const posts = props.post.nodes;
 
   function removeHTML(str) {
-    var tmp = document.createElement("DIV")
-    tmp.innerHTML = str
-    return tmp.textContent || tmp.innerText || ""
+    var tmp = document.createElement("DIV");
+    tmp.innerHTML = str;
+    return tmp.textContent || tmp.innerText || "";
   }
 
   return (
@@ -139,7 +139,7 @@ const Items = (props) => {
             className={classes.heading}
           >
             <Link to={`/${item.slug}`} className={classes.cardLink}>
-              <Card sx={{maxWidth: 345}} className={classes.card}>
+              <Card sx={{ maxWidth: 345 }} className={classes.card}>
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     {item.title}
@@ -164,15 +164,15 @@ const Items = (props) => {
         ))}
       </Grid>
     </div>
-  )
-}
+  );
+};
 
 Items.propTypes = {
   /**
    * External classes
    */
   className: PropTypes.string,
-}
+};
 
-export default Items
+export default Items;
 //export default graphql(getPosts)(Items) // Bind the query to the compoent to have access to the variables in the return.

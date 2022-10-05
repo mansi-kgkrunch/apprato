@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
       paddingRight: "60px",
       [theme.breakpoints.down("sm")]: {
         paddingTop: 0,
-        paddingRight: 0,  
+        paddingRight: 0,
       },
     },
   },
@@ -158,7 +158,7 @@ const Header = (props) => {
           data-aos={"fade-up"}
           className={classes.searchBoxContainer}
         >
-          <Box component="form" noValidate className={classes.searchBox}>
+          {/* <Box component="form" noValidate className={classes.searchBox}>
             <IconButton
               type="submit"
               aria-label="search"
@@ -175,7 +175,7 @@ const Header = (props) => {
               size="large"
               style={{ width: "100%" }}
             />
-          </Box>
+          </Box> */}
         </Grid>
       </Grid>
     </div>

@@ -83,10 +83,7 @@ const useStyles = makeStyles(theme => ({
     padding: "10px 36px",
     color: "#0290d8",
     border: "2px solid #0290d8",
-    borderRadius: "unset",
-    "&:hover": {
-      backgroundColor: "transparent !important"
-    }
+    borderRadius: "unset"
   },
   serviceText: {
     maxWidth: "65% !imporatant",
@@ -175,7 +172,7 @@ const Services = props => {
           <Tabs
             value={tab}
             onChange={handleTabChange}
-            classname={classes.kgDesktopHome}
+            className={classes.kgDesktopHome}
           >
             <Tab
               label={<span className={classes.tabLabel}>_Strategy</span>}
@@ -223,7 +220,7 @@ const Services = props => {
         >
           {tab === 0 && (
             <Grid className={classes.serviceText}>
-              <Typography variant="p">
+              <Typography>
                 Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industry's standard dummy
                 text ever since the 1500s, when an unknown printer took a galley
@@ -240,7 +237,7 @@ const Services = props => {
           )}
           {tab === 1 && (
             <Grid className={classes.serviceText}>
-              <Typography variant="p">
+              <Typography>
                 dfsdfsdfdsf Lorem Ipsum is simply dummy text of the printing and
                 typesetting industry. Lorem Ipsum has been the industry's
                 standard dummy text ever since the 1500s, when an unknown
@@ -257,7 +254,7 @@ const Services = props => {
           )}
           {tab === 2 && (
             <Grid className={classes.serviceText}>
-              <Typography variant="p">
+              <Typography>
                 Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industry's standard dummy
                 text ever since the 1500s, when an unknown printer took a galley
@@ -274,13 +271,13 @@ const Services = props => {
           )}
           {tab === 3 && (
             <Grid className={classes.serviceText}>
-              <Typography variant="p">Tab 3 content</Typography>
+              <Typography>Tab 3 content</Typography>
               <Button className={classes.serviceButton}>Learn More</Button>
             </Grid>
           )}
           {tab === 4 && (
             <Grid className={classes.serviceText}>
-              <Typography variant="p">Tab 4 content</Typography>
+              <Typography>Tab 4 content</Typography>
               <Button className={classes.serviceButton}>Learn More</Button>
             </Grid>
           )}

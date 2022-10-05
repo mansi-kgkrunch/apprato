@@ -166,7 +166,7 @@ const Experts = props => {
                 />
               </span>
 
-              <Typography variant="p" className={classes.expertTitle}>
+              <Typography className={classes.expertTitle}>
                 Adobe Certified Expert developer.
               </Typography>
             </ListItem>
@@ -181,7 +181,7 @@ const Experts = props => {
                 />
               </span>
 
-              <Typography variant="p" className={classes.expertTitle}>
+              <Typography className={classes.expertTitle}>
                 Mahgento 2 Certified Cloud developer.
               </Typography>
             </ListItem>
@@ -195,7 +195,7 @@ const Experts = props => {
                   className={classes.singleImage}
                 />
               </span>
-              <Typography variant="p" className={classes.expertTitle}>
+              <Typography className={classes.expertTitle}>
                 AWS Certified Cloud Practitioner.
               </Typography>
             </ListItem>
@@ -209,7 +209,7 @@ const Experts = props => {
                   className={classes.singleImage}
                 />
               </span>
-              <Typography variant="p" className={classes.expertTitle}>
+              <Typography className={classes.expertTitle}>
                 Stripe Professional Implementation.
               </Typography>
             </ListItem>
@@ -223,7 +223,7 @@ const Experts = props => {
                   className={classes.singleImage}
                 />
               </span>
-              <Typography variant="p" className={classes.expertTitle}>
+              <Typography className={classes.expertTitle}>
                 AWS Certified Cloud Practitioner.
               </Typography>
             </ListItem>
@@ -237,7 +237,7 @@ const Experts = props => {
                   className={classes.singleImage}
                 />
               </span>
-              <Typography variant="p" className={classes.expertTitle}>
+              <Typography className={classes.expertTitle}>
                 Prince2 Foundation Certified Cloud Practitioner.
               </Typography>
             </ListItem>

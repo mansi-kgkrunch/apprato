@@ -288,15 +288,13 @@ const useStyles = makeStyles((theme) => ({
       borderColor: "#3377ff",
     },
     [theme.breakpoints.down("xs")]: {
-      display: "flex",
-      justifyContent: "end",
+      display: "flex !important",
+      justifyContent: "center",
+      marginBottom: "-10px",
       position: "absolute",
       bottom: "10px",
     },
     [theme.breakpoints.down("lg")]: {
-      display: "none",
-    },
-    [theme.breakpoints.down("sm")]: {
       display: "none",
     },
   },

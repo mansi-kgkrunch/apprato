@@ -91,7 +91,7 @@ const BlogListing = () => {
   const classes = useStyles();
   const location = useLocation();
   var path = location.pathname.slice(1);
-
+  // var path = location.pathname.split("/")[3];
   const GET_POST = gql`{
     post(
       id: "${path}"
