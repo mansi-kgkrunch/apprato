@@ -1,18 +1,23 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Button } from '@material-ui/core';
-import { LearnMoreLink } from 'components/atoms';
-import { SectionHeader } from 'components/molecules';
-import { Section } from 'components/organisms';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Section } from "components/organisms";
+import {
+  Header,
+  Body,
+  SubscribeBottom,
+  RelatedCaseStudies,
+} from "./components";
+import { gql } from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {},
   formContainer: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
     maxWidth: 500,
     margin: `0 auto`,
   },
@@ -21,13 +26,95 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: 0,
   },
   label: {
-    fontWeight: 'bold',
-    textTransform: 'uppercase',
+    fontWeight: "bold",
+    textTransform: "uppercase",
+  },
+  headerPaddingTop: {
+    backgroundColor: "#f9f9f9",
+    backgroundImage: "url('/images/casestudies/CaseStudies.png')",
+    paddingTop: "122.23px",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    paddingBottom: "300px",
+    paddingTop: "122px",
+    paddingLeft: "120px",
+    paddingRight: "120px",
+    [theme.breakpoints.down("xs")]: {
+      paddingLeft: "20px",
+      paddingRight: "20px",
+      paddingBottom: 0,
+    },
+    [theme.breakpoints.down("sm")]: {
+      paddingBottom: "200px",
+    },
+  },
+  bodyPaddingTop: {
+    marginTop: "-150px",
+    paddingLeft: "120px",
+    paddingRight: "120px",
+    paddingTop: 0,
+    paddingLeft: "120px",
+    paddingRight: "120px",
+    [theme.breakpoints.down("sm")]: {
+      paddingLeft: "20px",
+      paddingRight: "20px",
+      marginTop: "20px",
+      marginTop: "-110px",
+    },
+  },
+  RelatedCaseStudiesPaddingTop: {
+    paddingTop: "14px",
+    paddingLeft: 0,
+    paddingRight: 0,
+  },
+  subscribeBottomPaddingTop: {
+    backgroundColor: "#f9f9f9",
+    paddingLeft: "90px",
+    paddingRight: "90px",
+    [theme.breakpoints.down("sm")]: {
+      paddingLeft: "20px",
+      paddingRight: "20px",
+    },
   },
 }));
 
 const CaseStudies = () => {
   const classes = useStyles();
+  const menuId = JSON.parse(localStorage.getItem("menuId"));
+  console.log(menuId, "menuId");
+
+  if (menuId) {
+    var GET_PAGE = gql`
+    {
+      menuItem(id: ${menuId}, idType: DATABASE_ID) {
+        label
+        id
+        connectedNode {
+          node {
+            ... on Page {
+              id
+              caseStudies {
+                bodyTitle
+                description
+                title
+                subtitle
+                image1 {
+                  mediaItemUrl
+                }
+                image2 {
+                  mediaItemUrl
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+  }
+
+  const { loading, error, data } = useQuery(GET_PAGE);
+  var pageContent = data?.menuItem.connectedNode?.node.caseStudies;
 
   const handleClick = () => {
     window.history.back();
@@ -35,42 +122,17 @@ const CaseStudies = () => {
 
   return (
     <div className={classes.root}>
-      <Section className={classes.section}>
-        <div className={classes.formContainer}>
-          <SectionHeader
-            label="Case Studies"
-            title=""
-            subtitle={
-              <span>
-                There’s nothing here, but if you feel this is an error please{' '}
-                <LearnMoreLink
-                  title="let us know"
-                  href="#"
-                  typographyProps={{ variant: 'h6' }}
-                />
-              </span>
-            }
-            titleProps={{
-              variant: 'h3',
-            }}
-            labelProps={{
-              color: 'secondary',
-              className: classes.label,
-              variant: 'h5',
-            }}
-            ctaGroup={[
-              <Button
-                size="large"
-                variant="contained"
-                color="primary"
-                onClick={handleClick}
-              >
-                Go Back
-              </Button>,
-            ]}
-            disableGutter
-          />
-        </div>
+      <Section className={classes.headerPaddingTop}>
+        <Header post={pageContent} />
+      </Section>
+      <Section className={classes.bodyPaddingTop}>
+        <Body post={pageContent} />
+      </Section>
+      <Section className={classes.RelatedCaseStudiesPaddingTop}>
+        <RelatedCaseStudies />
+      </Section>
+      <Section className={classes.subscribeBottomPaddingTop}>
+        <SubscribeBottom />
       </Section>
     </div>
   );

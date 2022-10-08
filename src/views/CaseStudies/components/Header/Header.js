@@ -11,6 +11,36 @@ const useStyles = makeStyles((theme) => ({
     "& .MuiGrid-root.section-header__subtitle-wrapper.MuiGrid-item.MuiGrid-grid-xs-12": {
       marginBottom: "24px",
     },
+    "&  .kg-hero-content-area .kg-inner-hero-content h1": {
+      fontSize: "48px",
+      lineHeight: "56px",
+      marginTop: "0",
+      marginBottom: "30px",
+      [theme.breakpoints.down("sm")]: {
+        fontSize: "38px",
+        marginTop: "0",
+        marginBottom: "24px",
+        lineHeight: "46px",
+      },
+    },
+    "& .kg-hero-content-area .kg-inner-hero-content p.kg-full-content": {
+      fontSize: "18px",
+      fontWeight: "600",
+      marginBottom: "0",
+      marginTop: "24px",
+      display: "inline-block",
+      [theme.breakpoints.down("sm")]: {
+        fontSize: "16px",
+        marginTop: "22px",
+      },
+    },
+    "& .kg-hero-content-area": {
+      maxWidth: "1000px",
+      marginTop: "40px",
+      [theme.breakpoints.down("sm")]: {
+        marginTop: "0",
+      },
+    },
   },
   heading: {
     "& h2": {
@@ -115,19 +145,6 @@ const Header = (props) => {
 
   return (
     <div className={clsx(classes.root, className)} {...rest}>
-      <Breadcrumbs
-        separator="|"
-        aria-label="breadcrumb"
-        className={classes.breadcrumbs}
-      >
-        <Link underline="hover" color="inherit" href="/">
-          Development
-        </Link>
-        <Link underline="hover" color="inherit" href="/blog">
-          Technology
-        </Link>
-        <Typography color="text.primary">UI</Typography>
-      </Breadcrumbs>
       <Grid container justify="space-between">
         <Grid
           item
@@ -139,62 +156,16 @@ const Header = (props) => {
           xl={9}
           data-aos={"fade-up"}
         >
-          <SectionHeader
-            title={post.title}
-            subtitle="The Apprato Blog is the hub for business owners, managers, entrepreneurs and developers featuring key technology news, resources and insights."
-            align="left"
-            disableGutter
-            titleVariant="h2"
-          />
-          <Grid
-            item
-            container
-            alignItems="center"
-            xs={12}
-            sm={12}
-            md={6}
-            lg={6}
-            xl={6}
-            data-aos={"fade-up"}
-            className={classes.title1}
-          >
-            {post.author.node.firstName == "Jordan" ? (
-              <Avatar
-                alt={post.author.node.firstName}
-                src="/images/blog/author-jordan_pearce.png"
-                className={classes.sizeAvatar}
-              />
-            ) : (
-              <Avatar
-                alt={post.author.node.firstName}
-                src="/images/consultants/Stephen.png"
-                className={classes.sizeAvatar}
-              />
-            )}
-            <p className={classes.author}>
-              <strong>
-                by{" "}
-                {post.author.node.firstName + " " + post.author.node.lastName}{" "}
-              </strong>
-              <br />
-              <small>last week | 7 min read</small>
-            </p>
-          </Grid>
-          <Grid
-            item
-            container
-            alignItems="center"
-            xs={12}
-            sm={12}
-            md={6}
-            lg={6}
-            xl={6}
-            data-aos={"fade-up"}
-            className={classes.authorGrid}
-          >
-            {" "}
-            <p className={classes.author}>Share this article</p>
-          </Grid>
+          <div class="kg-hero-content-area">
+            <div class="kg-inner-hero-content">
+              <h1>{post?.title}</h1>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: post?.subtitle,
+                }}
+              ></div>
+            </div>
+          </div>
         </Grid>
       </Grid>
     </div>

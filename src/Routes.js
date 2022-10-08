@@ -26,17 +26,17 @@ const Routes = () => {
         path="/"
       />
       <RouteWithLayout
+        component={AboutView}
+        exact
+        layout={MainLayout}
+        path="/about"
+      />
+      <RouteWithLayout
         component={ServicesView}
         exact
         layout={MainLayout}
         path="/services/:category"
       />
-      {/* <RouteWithLayout
-        component={StrategyView}
-        exact
-        layout={MainLayout}
-        path="/strategy"
-      /> */}
       <RouteWithLayout
         component={BlogView}
         exact
@@ -65,7 +65,7 @@ const Routes = () => {
         component={CaseStudiesView}
         exact
         layout={MainLayout}
-        path="/case-studies/:category"
+        path="/casestudies/:category"
       />
       <RouteWithLayout
         component={ContactView}

@@ -163,8 +163,8 @@ const useStyles = makeStyles((theme) => ({
     padding: "0px 12px",
     justifyContent: "center",
     borderRadius: "3px",
-    // opacity: "0",
-    // visibility: "hidden",
+    opacity: "0",
+    visibility: "hidden",
     padding: 0,
     minWidth: "260px",
     left: 0,
@@ -210,7 +210,7 @@ const Topbar = (props) => {
   const GET_MENU = gql`
     {
       menu(id: "dGVybTozNg==") {
-        menuItems {
+        menuItems(first: 100) {
           nodes {
             id
             label
@@ -237,6 +237,7 @@ const Topbar = (props) => {
   const [menuId, setMenuId] = React.useState();
 
   var menuItems = data?.menu.menuItems;
+
   var parentId = [];
 
   // function handleClick(id) {
@@ -289,7 +290,7 @@ const Topbar = (props) => {
           <Grid
             item
             container
-            justifyContent="flex-end"
+            justifyContent="start"
             xs={2}
             md={6}
             lg={6}
@@ -323,6 +324,9 @@ const Topbar = (props) => {
                                   handleCollpaseClick(menu.databaseId)
                                 )}
                                 onMouseOver={() =>
+                                  handleMouseHover(menu.databaseId)
+                                }
+                                onMouseLeave={() =>
                                   handleMouseHover(menu.databaseId)
                                 }
                               >
@@ -398,74 +402,67 @@ const Topbar = (props) => {
                             </>
                           )}
                           {menu.databaseId == menuId ? (
-                            <Collapse in={open} timeout="auto" unmountOnExit>
-                              {menu.childItems ? (
-                                <>
-                                  <List
-                                    className={
-                                      classes.listItemSubMenu + " kg_cust_child"
-                                    }
-                                    onMouseLeave={() =>
-                                      handleMouseHover(menu.databaseId)
-                                    }
-                                  >
-                                    {menu.childItems.edges.map(function(
-                                      childMenu
-                                    ) {
-                                      return (
-                                        <>
-                                          <ListItem
-                                            id={childMenu.node.databaseId}
-                                            key={childMenu.node.id}
+                            //  <Collapse in={open} timeout="auto" unmountOnExit>
+                            menu.childItems ? (
+                              <>
+                                <List
+                                  className={
+                                    classes.listItemSubMenu + " kg_cust_child"
+                                  }
+                                  onMouseLeave={() =>
+                                    handleMouseHover(menu.databaseId)
+                                  }
+                                >
+                                  {menu.childItems.edges.map(function(
+                                    childMenu
+                                  ) {
+                                    return (
+                                      <>
+                                        <ListItem
+                                          id={childMenu.node.databaseId}
+                                          key={childMenu.node.id}
+                                          style={{
+                                            borderBottom:
+                                              "0.4px solid #2630683d",
+                                          }}
+                                        >
+                                          <LinkHref
+                                            onClick={() => (
+                                              handleClick(
+                                                childMenu.node.databaseId
+                                              ),
+                                              handleCollpaseClick(
+                                                menu.databaseId
+                                              )
+                                            )}
+                                            to={`${childMenu.node.path}`}
                                             style={{
-                                              borderBottom:
-                                                "0.4px solid #2630683d",
+                                              textDecoration: "none",
+                                              color: "#202f43",
                                             }}
                                           >
-                                            <LinkHref
-                                              onClick={() => (
-                                                handleClick(
-                                                  childMenu.node.databaseId
-                                                ),
-                                                handleCollpaseClick(
-                                                  menu.databaseId
-                                                )
-                                              )}
-                                              to={`/${menu.label
-                                                .trim()
-                                                .replace(/\s+/g, "-")
-                                                .toLowerCase()}/${
-                                                childMenu.node.path.split(
-                                                  "/"
-                                                )[2]
-                                              }`}
-                                              style={{
-                                                textDecoration: "none",
-                                                color: "#202f43",
-                                              }}
+                                            <Typography
+                                              className={classes.subMenu}
                                             >
-                                              <Typography
-                                                className={classes.subMenu}
-                                              >
-                                                {childMenu.node.label}
-                                              </Typography>
-                                              <input
-                                                type="hidden"
-                                                value={menu.databaseId}
-                                                className="kg_sub_menu"
-                                              ></input>
-                                            </LinkHref>
-                                          </ListItem>
-                                        </>
-                                      );
-                                    })}
-                                  </List>
-                                </>
-                              ) : (
-                                ""
-                              )}
-                            </Collapse>
+                                              {childMenu.node.label}
+                                            </Typography>
+                                            <input
+                                              type="hidden"
+                                              value={menu.databaseId}
+                                              className="kg_sub_menu"
+                                            ></input>
+                                          </LinkHref>
+                                        </ListItem>
+                                      </>
+                                    );
+                                  })}
+                                </List>
+                              </>
+                            ) : (
+                              ""
+                            )
                           ) : (
+                            /* </Collapse> */
                             ""
                           )}
                         </ListItem>
@@ -475,6 +472,25 @@ const Topbar = (props) => {
                     </>
                   );
                 })}
+                {/* <LinkHref
+                  to={`/case-studies`}
+                  style={{
+                    textDecoration: "none",
+                    position: "relative",
+                  }}
+                >
+                  <Typography
+                    variant="body1"
+                    color="textPrimary"
+                    className={
+                      HomePage === 1
+                        ? classes.listItemTextHome
+                        : classes.listItemText
+                    }
+                  >
+                    case Studies
+                  </Typography>
+                </LinkHref> */}
               </List>
             </Hidden>
           </Grid>

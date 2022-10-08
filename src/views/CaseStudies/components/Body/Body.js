@@ -6,6 +6,7 @@ import { Grid, Typography, TextField, Button } from "@material-ui/core";
 import { SectionHeader } from "components/molecules";
 import { Description } from "@material-ui/icons";
 import { Link } from "react-router-dom";
+import { Skeleton } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,26 +23,62 @@ const useStyles = makeStyles((theme) => ({
     "& .MuiInputBase-root.MuiInput-root.MuiInputBase-fullWidth.MuiInput-fullWidth.MuiInputBase-formControl.MuiInput-formControl ": {
       borderBottom: "2px solid",
     },
-  },
-  textfield: {
-    marginBottom: "1rem",
-    color: "#0e44ff",
-    // background: "#FFF",
-    // backgroundColor: "#FFF",
-    input: {
-      // color: "#0e44ff",
-      // background: "##0e44ff",
-      borderBottomColor: "#0e44ff",
+    "& .kg-what-we-area": {
+      marginTop: "110px",
+      paddingBottom: "400px",
+      [theme.breakpoints.down("sm")]: {
+        fontSize: "16px",
+        marginTop: "80px",
+        paddingBottom: "140px",
+      },
     },
-    // "&:hover": {
-    //   background: "#FFF",
-    // },
-    // "&:visited": {
-    //   background: "#FFF",
-    // },
-    // "&:active": {
-    //   background: "#FFF",
-    // },
+    "& .kg-main-area .kg-left-area h2": {
+      marginTop: "0",
+      fontSize: "34px",
+      lineHeight: "40px",
+      marginBottom: "36px",
+    },
+    "& .kg-main-area .kg-left-area p": {
+      fontSize: "18px",
+      fontWeight: "600",
+      lineHeight: "24px",
+      margin: "0",
+      [theme.breakpoints.down("xs")]: {
+        fontSize: "16px",
+        lineHeight: "22px",
+        marginBottom: "30px",
+      },
+    },
+    "& .kg-what-we-area .kg-main-area": {
+      display: "flex",
+      [theme.breakpoints.down("xs")]: {
+        flexWrap: "wrap",
+      },
+    },
+    "& .kg-what-we-area .kg-left-area": {
+      width: "35%",
+      float: "left",
+      [theme.breakpoints.down("xs")]: {
+        width: "100%",
+      },
+    },
+    "& .kg-what-we-area .kg-right-content": {
+      width: "65%",
+      float: "left",
+    },
+    "& .kg-what-we-area .kg-right-content ul li ": {
+      fontSize: "18px",
+      marginBottom: "12px",
+      lineHeight: "24px",
+      [theme.breakpoints.down("xs")]: {
+        fontSize: "16px",
+        marginBottom: "10px",
+        lineHeight: "22px",
+      },
+    },
+    "& .kg-what-we-area .kg-right-content ul": {
+      margin: 0,
+    },
   },
   heading: {
     "& h2": {
@@ -156,27 +193,27 @@ const useStyles = makeStyles((theme) => ({
     verticalAlign: "middle",
     marginLeft: "auto !important",
     "&:after": {
-      paddingBottom: "40%",
+      paddingBottom: "60%",
       content: '""',
       position: "relative",
       display: "block",
       width: "100%",
     },
-    [theme.breakpoints.down("md")]: {
-      "&:after": {
-        paddingBottom: "70%",
-      },
-    },
-    [theme.breakpoints.down("xs")]: {
-      "&:after": {
-        paddingBottom: "70%",
-      },
-    },
-    [theme.breakpoints.down("sm")]: {
-      "&:after": {
-        paddingBottom: "70%",
-      },
-    },
+    // [theme.breakpoints.down("md")]: {
+    //   "&:after": {
+    //     paddingBottom: "52%",
+    //   },
+    // },
+    // [theme.breakpoints.down("xs")]: {
+    //   "&:after": {
+    //     paddingBottom: "52%",
+    //   },
+    // },
+    // [theme.breakpoints.down("sm")]: {
+    //   "&:after": {
+    //     paddingBottom: "54%",
+    //   },
+    // },
   },
   banner: {
     height: "100%",
@@ -191,6 +228,9 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: "100%",
     display: "inline-block",
+  },
+  bannerGrid: {
+    maxWidth: "1000px",
   },
   contentGrid: {},
   listItemButton: {
@@ -211,6 +251,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       maxWidth: "100%",
       width: "100%",
+      margin: "auto",
     },
   },
 }));
@@ -219,6 +260,7 @@ const Body = (props) => {
   const { className, ...rest } = props;
   const classes = useStyles();
   const post = props.post;
+  console.log(post, "dmfgh");
 
   return (
     <div className={clsx(classes.root, className)} {...rest}>
@@ -246,166 +288,29 @@ const Body = (props) => {
             className={classes.bannerGrid}
           >
             <div className={classes.divImage}>
-              {post.featuredImage != null ? (
+              {post?.image2.mediaItemUrl ? (
                 <img
                   className={classes.banner}
-                  src={
-                    "https://backend.apprato.com.au/wp-content/uploads/" +
-                    post.featuredImage.node.mediaDetails.file
-                  }
+                  src={post?.image2.mediaItemUrl}
+                  data-aos-easing="ease-out-cubic"
+                  data-aos-duration="2000"
                 />
-              ) : null}
+              ) : (
+                <Skeleton
+                  variant="rectangular"
+                  className={classes.banner}
+                  animation="wave"
+                />
+              )}
             </div>
           </Grid>
-          <div>
-            <div className={classes.content}>
-              <div dangerouslySetInnerHTML={{ __html: post.content }} />
-            </div>
+          <div class="kg-what-we-area">
+            <div
+              dangerouslySetInnerHTML={{
+                __html: post?.description,
+              }}
+            />
           </div>
-          <Grid
-            item
-            alignItems="center"
-            xs={12}
-            sm={9}
-            md={9}
-            lg={9}
-            xl={9}
-            data-aos={"fade-up"}
-            className={classes.body}
-          >
-            <Link href="/">
-              <img src="/images/share_blog.png" />
-            </Link>
-            <Typography
-              variant="body1"
-              component="div"
-              gutterBottom
-              className={classes.typography}
-            >
-              Share this article
-            </Typography>
-          </Grid>
-        </Grid>
-        <Grid
-          item
-          justify="flex-start"
-          xs={12}
-          md={3}
-          lg={3}
-          xl={3}
-          data-aos={"fade-up"}
-          className={classes.right}
-        >
-          <Grid
-            item
-            alignItems="center"
-            xs={12}
-            md={12}
-            lg={12}
-            xl={12}
-            data-aos={"fade-up"}
-            className={classes.subscribeRight}
-          >
-            <Typography variant="h4" component="div" gutterBottom>
-              subscribe to our newsletter.
-            </Typography>
-            <Typography
-              variant="p"
-              component="div"
-              className={classes.description}
-              gutterBottom
-            >
-              Get news and insights to optimise your business through
-              application development and smarter eCommerce
-              <br />
-              <br />
-            </Typography>
-            <TextField
-              fullWidth
-              id="filled-search"
-              label="First Name"
-              type="search"
-              InputProps={{
-                className: classes.textfield,
-                disableUnderline: true,
-              }}
-              InputLabelProps={{
-                className: classes.textfield,
-              }}
-            />
-            <TextField
-              fullWidth
-              id="filled-search"
-              label="Surname"
-              type="search"
-              InputProps={{
-                className: classes.textfield,
-                disableUnderline: true,
-              }}
-              InputLabelProps={{
-                className: classes.textfield,
-              }}
-            />
-            <TextField
-              fullWidth
-              id="filled-search"
-              label="Email"
-              type="search"
-              InputProps={{
-                className: classes.textfield,
-                disableUnderline: true,
-              }}
-              InputLabelProps={{
-                className: classes.textfield,
-              }}
-            />
-            <Button
-              size="large"
-              variant="outlined"
-              style={{ backgroundColor: "transparent" }}
-              className={classes.listItemButton}
-            >
-              Subscribe
-            </Button>
-          </Grid>
-
-          {/* <Grid
-            item
-            alignItems="center"
-            xs={12}
-            sm={12}
-            md={12}
-            lg={12}
-            xl={12}
-            className={classes.workTogether}
-          >
-            <Typography
-              variant="h4"
-              component="div"
-              gutterBottom
-              style={{color:"#202f43"}}
-              className={classes.subscribeRightText}
-            >
-              Subscribe to our newsletter
-            </Typography>
-            <Typography
-              variant="h4"
-              component="div"
-              gutterBottom
-              className={classes.subscribeRightText}
-            >
-              Speak to a digital specialist now - not a salesman
-            </Typography>
-            <Button
-              size="large"
-              variant="contained"
-              color="primary"
-              className={classes.listItemButton}
-              href="mailto:contact@apprato.com.au"
-            >
-              Get in touch
-            </Button>
-          </Grid> */}
         </Grid>
       </Grid>
     </div>
