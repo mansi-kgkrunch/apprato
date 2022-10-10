@@ -67,8 +67,8 @@ const useStyles = makeStyles(theme => ({
     }
   },
   devider: {
-    background: "#8998c0",
-    marginBottom: "50px"
+    background: "#233651",
+    marginBottom: "30px"
   },
   sociallink: {
     float: "right",

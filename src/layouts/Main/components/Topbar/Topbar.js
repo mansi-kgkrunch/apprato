@@ -18,6 +18,8 @@ import {
 } from "@material-ui/core";
 import { Link as LinkHref } from "react-router-dom";
 import { Image } from "components/atoms";
+import { useDispatch } from "react-redux";
+import { menuID } from "redux/slices/MenuId";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,11 +54,12 @@ const useStyles = makeStyles((theme) => ({
     top: "0",
     zIndex: "1",
     width: "100%",
-    [theme.breakpoints.down("lg")]: {
-      //padding: theme.spacing(0, 12, 20)
-      padding: "0px 120px",
+    padding: "15px 120px",
+    paddingTop: "25px",
+    "@media (max-width:1180px)": {
+      padding: "15px 30px",
     },
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       // padding: theme.spacing(0, 0, 12)
       padding: "0px 20px",
       paddingTop: "15px",
@@ -64,13 +67,13 @@ const useStyles = makeStyles((theme) => ({
   },
   listItem: {
     cursor: "pointer",
-    padding: "0 1.875rem",
-    height: "100%",
     [theme.breakpoints.down("lg")]: {
-      padding: "0 1.2rem",
+      padding: "1rem",
+      height: "auto",
     },
     [theme.breakpoints.down("md")]: {
-      padding: "0 1rem",
+      padding: "1rem",
+      height: "auto",
     },
   },
   listItemText: {
@@ -110,6 +113,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "2rem",
     boxShadow: "unset",
     border: "2px solid white",
+    borderRadius: 0,
     [theme.breakpoints.down("lg")]: {
       fontSize: "1.5rem",
       minWidth: "10rem",
@@ -121,6 +125,7 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "initial",
   },
   listItemButton: {
+    borderRadius: 0,
     whiteSpace: "nowrap",
     minWidth: "15.375rem",
     backgroundColor: "transparent",
@@ -150,15 +155,17 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   logoContainer: {
-    width: "32.375rem",
+    width: "100%",
+    maxWidth: "220px",
     height: "auto",
     [theme.breakpoints.down("md")]: {
-      width: "18.75rem",
+      width: "100%",
+      maxWidth: "220px",
     },
   },
   listItemSubMenu: {
     position: "absolute",
-    top: "84px",
+    top: "60px",
     backgroundColor: "#fff",
     padding: "0px 12px",
     justifyContent: "center",
@@ -187,6 +194,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   InnermenuIcon: {
+    top: "6px",
     right: "0px",
     width: "24px",
     height: "24px",
@@ -197,6 +205,55 @@ const useStyles = makeStyles((theme) => ({
       top: "3px !important",
       right: "-2px",
     },
+  },
+  logoImage: {
+    // [theme.breakpoints.down("md")]: {
+    height: "auto",
+    // },
+  },
+  kgLogoContainer: {
+    flexGrow: 0,
+    maxWidth: "15%",
+    flexBasis: "15%",
+    [theme.breakpoints.down("sm")]: {
+      flexGrow: 0,
+      maxWidth: "50%",
+      flexBasis: "50%",
+    },
+  },
+  menuContainer: {
+    flexGrow: 0,
+    maxWidth: "70%",
+    flexBasis: "70%",
+    justifyContent: "center",
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
+  },
+  ButtonContainer: {
+    flexGrow: 0,
+    maxWidth: "15%",
+    flexBasis: "15%",
+    [theme.breakpoints.down("sm")]: {
+      flexGrow: 0,
+      maxWidth: "50%",
+      flexBasis: "50%",
+      justifyContent: "end",
+    },
+    "@media (max-width:960px)": {
+      justifyContent: "flex-end !important",
+    },
+  },
+  subMenuItems: {
+    borderBottom: "0.4px solid #2630683d",
+    padding: "0px !important",
+  },
+  subMenuList: {
+    textDecoration: "none",
+    color: "#202f43",
+    width: "100%",
+    display: "block",
+    padding: "8px 16px",
   },
 }));
 
@@ -235,16 +292,8 @@ const Topbar = (props) => {
   const { loading, error, data } = useQuery(GET_MENU);
   const [open, setOpen] = React.useState(false);
   const [menuId, setMenuId] = React.useState();
-
   var menuItems = data?.menu.menuItems;
-
   var parentId = [];
-
-  // function handleClick(id) {
-  //   localStorage.setItem("menuId", JSON.stringify(id));
-  //   setOpen(!open);
-  //   setMenuId(id);
-  // }
   function handleClick(id) {
     localStorage.setItem("menuId", JSON.stringify(id));
   }
@@ -263,8 +312,17 @@ const Topbar = (props) => {
         className={classes.toolbar + " kg_header"}
         {...rest}
       >
-        <Grid container justifyContent="space-between">
-          <Grid item container xs={8} md={4} lg={3} xl={3} data-aos={"fade-up"}>
+        <Grid container justifyContent="space-between" alignItems="center">
+          <Grid
+            item
+            container
+            xs={8}
+            md={4}
+            lg={3}
+            xl={3}
+            data-aos={"fade-up"}
+            className={classes.kgLogoContainer}
+          >
             <div className={classes.logoContainer}>
               {/* <a href="/" title="thefront"> */}
               <LinkHref to="/">
@@ -296,6 +354,7 @@ const Topbar = (props) => {
             lg={6}
             xl={6}
             data-aos={"fade-up"}
+            className={classes.menuContainer}
           >
             <Hidden smDown>
               <List className={classes.navigationContainer}>
@@ -330,20 +389,20 @@ const Topbar = (props) => {
                                   handleMouseHover(menu.databaseId)
                                 }
                               >
-                                {menu.label}{" "}
+                                {menu.label}
                                 {menu.childItems.edges.length > 0 ? (
                                   <span>
-                                    {HomePage === 1 ? (
+                                    {/* {HomePage === 1 ? (
                                       <img
                                         src="/images/arrow.png"
                                         className={classes.menuIcon}
                                       />
-                                    ) : (
-                                      <img
-                                        src="/images/blue_arrow.png"
-                                        className={classes.InnermenuIcon}
-                                      />
-                                    )}
+                                    ) : ( */}
+                                    <img
+                                      src="/images/down_icon.png"
+                                      className={classes.InnermenuIcon}
+                                    />
+                                    {/* )} */}
                                   </span>
                                 ) : (
                                   ""
@@ -377,17 +436,17 @@ const Topbar = (props) => {
                                   {menu.label}{" "}
                                   {menu.childItems.edges.length > 0 ? (
                                     <span>
-                                      {HomePage === 1 ? (
+                                      {/* {HomePage === 1 ? (
                                         <img
                                           src="/images/arrow.png"
                                           className={classes.menuIcon}
                                         />
-                                      ) : (
-                                        <img
-                                          src="/images/blue_arrow.png"
-                                          className={classes.InnermenuIcon}
-                                        />
-                                      )}
+                                      ) : ( */}
+                                      <img
+                                        src="/images/down_icon.png"
+                                        className={classes.InnermenuIcon}
+                                      />
+                                      {/* )} */}
                                     </span>
                                   ) : (
                                     ""
@@ -421,10 +480,7 @@ const Topbar = (props) => {
                                         <ListItem
                                           id={childMenu.node.databaseId}
                                           key={childMenu.node.id}
-                                          style={{
-                                            borderBottom:
-                                              "0.4px solid #2630683d",
-                                          }}
+                                          className={classes.subMenuItems}
                                         >
                                           <LinkHref
                                             onClick={() => (
@@ -435,11 +491,8 @@ const Topbar = (props) => {
                                                 menu.databaseId
                                               )
                                             )}
+                                            className={classes.subMenuList}
                                             to={`${childMenu.node.path}`}
-                                            style={{
-                                              textDecoration: "none",
-                                              color: "#202f43",
-                                            }}
                                           >
                                             <Typography
                                               className={classes.subMenu}
@@ -497,12 +550,13 @@ const Topbar = (props) => {
           <Grid
             item
             container
-            justifyContent="flex-end"
             alignItems="center"
             xs={2}
             md={2}
             lg={3}
             xl={3}
+            justifyContent="flex-start"
+            className={classes.ButtonContainer}
           >
             <Hidden smDown>
               <Button

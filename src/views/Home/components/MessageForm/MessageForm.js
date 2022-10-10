@@ -20,15 +20,16 @@ const useStyles = makeStyles((theme) => ({
       //   padding: "0 30px",
       // },
     },
-    // "& .MuiFormControl-root.MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-shrink.Mui-focused.Mui-focused": {
-    //   color: "#0e44ff",
-    //   padding: "0 30px !important",
-    //   [theme.breakpoints.down("sm")]: {
-    //     padding: 0,
-    //   },
-    // },
-    "& .MuiInputBase-root.MuiInput-root.MuiInput-underline.MuiInputBase-formControl.MuiInput-formControl.MuiInputBase-multiline.MuiInput-multiline": {
-      borderBottom: "2px solid #0e44ff !important",
+    "& .MuiInputLabel-formControl": {
+      color: "#0e44ff",
+      padding: "0 30px",
+      [theme.breakpoints.down("sm")]: {
+        padding: 0,
+      },
+    },
+
+    "& .MuiInputBase-root.MuiInput-root.MuiInputBase-formControl.MuiInput-formControl.MuiInputBase-multiline.MuiInput-multiline": {
+      borderBottom: "2px solid #0e44ff",
     },
   },
   messageForm: {
@@ -144,7 +145,9 @@ const MessageForm = (props) => {
                 placeholder="First name"
                 multiline
                 className={classes.textfiled}
-                // InputProps={{ classes }}
+                InputProps={{
+                  disableUnderline: true,
+                }}
               />
               <TextField
                 id="standard-required"
@@ -152,7 +155,9 @@ const MessageForm = (props) => {
                 placeholder="Last name"
                 multiline
                 className={classes.textfiled}
-                // style={{ marginRight: "60px", width: "26%" }}
+                InputProps={{
+                  disableUnderline: true,
+                }}
               />
               <TextField
                 id="standard-required"
@@ -160,7 +165,9 @@ const MessageForm = (props) => {
                 placeholder="Company name"
                 multiline
                 className={classes.textfiled}
-                // style={{ marginRight: "60px", width: "26%" }}
+                InputProps={{
+                  disableUnderline: true,
+                }}
               />
             </div>
             <div className={classes.div}>
@@ -170,7 +177,9 @@ const MessageForm = (props) => {
                 placeholder="Email"
                 multiline
                 className={classes.textfiled}
-                // style={{ marginRight: "60px", width: "26%" }}
+                InputProps={{
+                  disableUnderline: true,
+                }}
               />
               <TextField
                 id="standard-required"
@@ -178,7 +187,9 @@ const MessageForm = (props) => {
                 placeholder="Telephone number"
                 multiline
                 className={classes.textfiled}
-                // style={{ marginRight: "60px", width: "26%" }}
+                InputProps={{
+                  disableUnderline: true,
+                }}
               />
               <TextField
                 id="standard-required"
@@ -186,7 +197,9 @@ const MessageForm = (props) => {
                 placeholder="Project details"
                 multiline
                 className={classes.textfiled}
-                // style={{ marginRight: "60px", width: "26%" }}
+                InputProps={{
+                  disableUnderline: true,
+                }}
               />
             </div>
             <div className={classes.kgSendMessageButton}>

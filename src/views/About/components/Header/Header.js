@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     objectFit: "cover",
     position: "relative",
     maxWidth: "670px",
-    margin: "auto",
+    margin: 'auto',
     "&:after": {
       paddingBottom: "88%",
       content: '""',
@@ -122,20 +122,22 @@ const Header = (props) => {
           data-aos={"fade-up"}
           className={classes.imageContainer}
         >
-          {post?.featuredImage.node.mediaItemUrl ? (
-            <img
-              className={classes.banner}
-              src={post?.featuredImage.node.mediaItemUrl}
-              data-aos-easing="ease-out-cubic"
-              data-aos-duration="2000"
-            />
-          ) : (
-            <Skeleton
-              variant="rectangular"
-              className={classes.banner}
-              animation="wave"
-            />
-          )}
+          <div className={classes.kg_images}>
+            {post?.featuredImage.node.mediaItemUrl ? (
+              <img
+                className={classes.banner}
+                src={post?.featuredImage.node.mediaItemUrl}
+                data-aos-easing="ease-out-cubic"
+                data-aos-duration="2000"
+              />
+            ) : (
+              <Skeleton
+                variant="rectangular"
+                className={classes.banner}
+                animation="wave"
+              />
+            )}
+          </div>
         </Grid>
       </Grid>
     </div>

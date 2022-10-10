@@ -260,7 +260,6 @@ const Body = (props) => {
   const { className, ...rest } = props;
   const classes = useStyles();
   const post = props.post;
-  console.log(post, "dmfgh");
 
   return (
     <div className={clsx(classes.root, className)} {...rest}>
@@ -288,10 +287,10 @@ const Body = (props) => {
             className={classes.bannerGrid}
           >
             <div className={classes.divImage}>
-              {post?.image2.mediaItemUrl ? (
+              {post?.bodyimage?.mediaItemUrl ? (
                 <img
                   className={classes.banner}
-                  src={post?.image2.mediaItemUrl}
+                  src={post?.bodyimage?.mediaItemUrl}
                   data-aos-easing="ease-out-cubic"
                   data-aos-duration="2000"
                 />
@@ -307,7 +306,7 @@ const Body = (props) => {
           <div class="kg-what-we-area">
             <div
               dangerouslySetInnerHTML={{
-                __html: post?.description,
+                __html: post?.bodycontent,
               }}
             />
           </div>

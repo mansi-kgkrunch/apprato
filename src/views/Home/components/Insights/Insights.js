@@ -6,29 +6,32 @@ import { Grid, Typography } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { gql } from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+import { useHistory } from "react-router-dom";
 
 const responsive = {
   superLargeDesktop: {
     breakpoint: { max: 10000, min: 2880 },
     items: 2,
     slidesToSlide: 2,
-    partialVisibilityGutter: 0
+    partialVisibilityGutter: 0,
   },
   desktop: {
     breakpoint: { max: 2880, min: 1024 },
     items: 3,
     slidesToSlide: 3,
-    partialVisibilityGutter: 0
+    partialVisibilityGutter: 0,
   },
   mobile: {
     breakpoint: { max: 1024, min: 0 },
     items: 1,
     slidesToSlide: 1,
-    partialVisibilityGutter: 0
-  }
+    partialVisibilityGutter: 0,
+  },
 };
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {},
   imageroot: {
     display: "block",
@@ -44,7 +47,7 @@ const useStyles = makeStyles(theme => ({
       paddingBottom: "68.5%",
       position: "relative",
       display: "block",
-      width: "100%"
+      width: "100%",
     },
     // [theme.breakpoints.down("md")]: {
     //   "&:after": {
@@ -53,14 +56,14 @@ const useStyles = makeStyles(theme => ({
     // },
     [theme.breakpoints.down("xs")]: {
       "&:after": {
-        paddingBottom: "63.5%"
-      }
+        paddingBottom: "63.5%",
+      },
     },
     [theme.breakpoints.down("sm")]: {
       "&:after": {
-        paddingBottom: "63.5%"
-      }
-    }
+        paddingBottom: "63.5%",
+      },
+    },
   },
   images: {
     width: "100%",
@@ -74,11 +77,11 @@ const useStyles = makeStyles(theme => ({
     objectPosition: "center",
     display: "inline-block",
     [theme.breakpoints.down("xs")]: {
-      borderRadius: "4px"
+      borderRadius: "4px",
     },
     [theme.breakpoints.down("sm")]: {
-      borderRadius: "4px"
-    }
+      borderRadius: "4px",
+    },
   },
   titleContainer: {
     margin: "0",
@@ -87,11 +90,11 @@ const useStyles = makeStyles(theme => ({
     color: "#202f43",
     fontWeight: 700,
     [theme.breakpoints.down("xs")]: {
-      textTransform: "uppercase"
+      textTransform: "uppercase",
     },
     [theme.breakpoints.down("sm")]: {
-      textTransform: "uppercase"
-    }
+      textTransform: "uppercase",
+    },
   },
   consultantTitle: {
     paddingBottom: "20px",
@@ -100,36 +103,36 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: "46px",
     [theme.breakpoints.down("xs")]: {
       paddingBottom: "20px",
-      paddingLeft: "0"
+      paddingLeft: "0",
     },
     [theme.breakpoints.down("sm")]: {
       paddingBottom: "20px",
-      paddingLeft: "0"
-    }
+      paddingLeft: "0",
+    },
   },
   carouselItem: {
     padding: "0 15px",
     [theme.breakpoints.down("xs")]: {
-      padding: "0"
+      padding: "0",
     },
     [theme.breakpoints.down("sm")]: {
-      padding: "0"
-    }
+      padding: "0",
+    },
   },
   CarouselSlider: {
-    paddingBottom: "0"
+    paddingBottom: "0",
   },
   subTitle: {
     // marginLeft: "24px",
     fontWeight: 700,
     [theme.breakpoints.down("xs")]: {
       paddingTop: "30px",
-      width: "70%"
+      width: "70%",
     },
     [theme.breakpoints.down("sm")]: {
       paddingTop: "30px",
-      width: "70%"
-    }
+      width: "70%",
+    },
   },
   carouselDot: {
     display: "none",
@@ -139,17 +142,17 @@ const useStyles = makeStyles(theme => ({
       display: "flex",
       justifyContent: "end",
       position: "absolute",
-      bottom: "40px"
+      bottom: "40px",
     },
     [theme.breakpoints.down("lg")]: {
-      display: "none"
+      display: "none",
     },
     [theme.breakpoints.down("sm")]: {
       display: "flex",
       justifyContent: "end",
       position: "absolute",
-      bottom: "40px"
-    }
+      bottom: "40px",
+    },
   },
   expertbox: {
     background: "#f2f3f8",
@@ -162,14 +165,14 @@ const useStyles = makeStyles(theme => ({
       paddingLeft: "20px",
       paddingRight: "20px",
       paddingTop: "60px",
-      paddingBottom: "60px"
+      paddingBottom: "60px",
     },
     [theme.breakpoints.down("sm")]: {
       paddingLeft: "20px",
       paddingRight: "20px",
       paddingTop: "60px",
-      paddingBottom: "60px"
-    }
+      paddingBottom: "60px",
+    },
   },
   button: {
     borderRadius: "0",
@@ -181,22 +184,22 @@ const useStyles = makeStyles(theme => ({
     marginTop: "24px",
     [theme.breakpoints.down("xs")]: {
       padding: "6px 8px",
-      marginTop: "32px"
+      marginTop: "32px",
     },
     [theme.breakpoints.down("sm")]: {
       padding: "6px 8px",
-      marginTop: "32px"
-    }
+      marginTop: "32px",
+    },
   },
   buttonContainer: {
     marginTop: 0,
     [theme.breakpoints.down("xs")]: {
-      justifyContent: "end"
+      justifyContent: "end",
     },
     [theme.breakpoints.down("sm")]: {
-      justifyContent: "end"
-    }
-  }
+      justifyContent: "end",
+    },
+  },
   // image: {
   //   padding: 0,
   //   textAlign: "center",
@@ -211,9 +214,80 @@ const useStyles = makeStyles(theme => ({
   // )
 }));
 
-const Insights = props => {
+const Insights = (props) => {
   const { className, ...rest } = props;
   const classes = useStyles();
+
+  const history = useHistory();
+
+  const GET_POSTS = gql`
+    {
+      posts(where: { orderby: { field: DATE, order: DESC } }, first: 10) {
+        nodes {
+          title
+          uri
+          slug
+          featuredImage {
+            node {
+              id
+              mediaDetails {
+                file
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const { loading, error, data } = useQuery(GET_POSTS);
+  const MAX_LENGTH = 150;
+  if (loading) return <p>Loading Posts...</p>;
+  if (error) return <p>An error occured!</p>;
+
+  const rowMarkup = data.posts?.nodes.map((item, index) => (
+    <Grid container justifyContent="space-between" key={index}>
+      <Grid
+        item
+        container
+        justifyContent="flex-start"
+        alignItems="center"
+        xs={12}
+        md={6}
+        lg={6}
+        xl={6}
+        className={classes.imageroot}
+      >
+        {item.featuredImage?.node?.mediaDetails.file ? (
+          <>
+            <img
+              src={
+                "https://backend.apprato.com.au/wp-content/uploads/" +
+                item.featuredImage?.node?.mediaDetails.file
+              }
+              alt=""
+              className={classes.images}
+              data-aos-easing="ease-out-cubic"
+              data-aos-duration="2000"
+            />
+          </>
+        ) : (
+          <>
+            <img
+              src="/images/placeholder.png"
+              className={classes.images}
+              alt="Jordan Pearce"
+            />
+          </>
+        )}
+      </Grid>
+      <Grid item container spacing={2} className={classes.titleContainer}>
+        <Typography variant="body1" className={classes.subTitle}>
+          {item?.title}
+        </Typography>
+      </Grid>
+    </Grid>
+  ));
 
   return (
     <div
@@ -247,97 +321,15 @@ const Insights = props => {
           partialVisible={false}
           renderButtonOutside={true}
         >
-          <Grid container justify="space-between">
-            <Grid
-              item
-              container
-              justify="flex-start"
-              alignItems="center"
-              xs={12}
-              md={6}
-              lg={6}
-              xl={6}
-              className={classes.imageroot}
-            >
-              <img
-                src="/images/72 Dpi/case studies/Aquila Image.jpg"
-                alt=""
-                className={classes.images}
-                data-aos-easing="ease-out-cubic"
-                data-aos-duration="2000"
-              />
-            </Grid>
-            <Grid item container spacing={2} className={classes.titleContainer}>
-              <Typography variant="body1" className={classes.subTitle}>
-                Event tickets with zoom integration.
-              </Typography>
-            </Grid>
-          </Grid>
-          <Grid container justify="space-between">
-            <Grid
-              item
-              container
-              justify="flex-start"
-              alignItems="center"
-              xs={12}
-              md={6}
-              lg={6}
-              xl={6}
-              className={classes.imageroot}
-            >
-              <img
-                src="/images/72 Dpi/case studies/Farm2 Market graphic.jpg"
-                alt=""
-                data-aos-easing="ease-out-cubic"
-                data-aos-duration="2000"
-                className={classes.images}
-              />
-            </Grid>
-            <Grid
-              xs={12}
-              item
-              container
-              className={classes.titleContainer}
-              spacing={2}
-            >
-              <Typography variant="body1" className={classes.subTitle}>
-                Custom 3rd Party logistics.
-              </Typography>
-            </Grid>
-          </Grid>
-          <Grid container justify="space-between">
-            <Grid
-              item
-              container
-              justify="flex-start"
-              alignItems="center"
-              xs={12}
-              md={6}
-              lg={6}
-              xl={6}
-              className={classes.imageroot}
-            >
-              <img
-                src="/images/72 Dpi/case studies/Aquila Image.jpg"
-                alt=""
-                className={classes.images}
-                data-aos-easing="ease-out-cubic"
-                data-aos-duration="2000"
-              />
-            </Grid>
-            <Grid item container spacing={2} className={classes.titleContainer}>
-              <Typography variant="body1" className={classes.subTitle}>
-                Custom Delivery service integration.
-              </Typography>
-            </Grid>
-          </Grid>
+          {rowMarkup}
         </Carousel>
         <Grid container className={classes.buttonContainer} justify="center">
           <Button
             variant="outlined"
             className={classes.button}
-            href="#outlined-buttons"
-            style={{ backgroundColor: "transparent",width:"202px"  }}
+            // href="/blog"
+            style={{ backgroundColor: "transparent", width: "202px" }}
+            onClick={()=>history.push('/blog')}
           >
             View Our Work
           </Button>
@@ -351,7 +343,7 @@ Insights.propTypes = {
   /**
    * External classes
    */
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default Insights;

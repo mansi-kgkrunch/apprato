@@ -15,6 +15,8 @@ import {
   Work,
   Insights,
 } from "./components";
+import { gql } from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
 
 import { sas1, sas2, sas3, sas4, sas5 } from "./data";
 
@@ -92,6 +94,26 @@ const Home = () => {
     return width;
   };
   const wide = useWindowWide(1020);
+
+  const GET_MENU = gql`
+    {
+      menuItem(id: "1612", idType: DATABASE_ID) {
+        id
+        label
+        childItems {
+          edges {
+            node {
+              id
+              label
+              databaseId
+            }
+          }
+        }
+      }
+    }
+  `;
+  const { loading, error, data } = useQuery(GET_MENU);
+  const servicesName = data?.menuItem.childItems.edges;
   return (
     <div className={classes.root}>
       <Section className={classes.pagePaddingTop}>
@@ -106,7 +128,7 @@ const Home = () => {
         </Section>
       ) : (
         <Section className={classes.sectionPaddingTop}>
-          <Services />
+          <Services post={servicesName} />
         </Section>
       )}
       <Section className={classes.sectionPaddingTop}>

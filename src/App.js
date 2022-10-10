@@ -73,6 +73,7 @@ const browserHistory = createBrowserHistory();
 //     }
 //   })
 // })
+
 const App = () => {
   AOS.init({
     once: true,
@@ -85,8 +86,9 @@ const App = () => {
     uri: "https://backend.apprato.com.au/graphql",
     cache: new InMemoryCache(),
   });
+
   // const client = new ApolloClient({
-  //   uri: "http://192.168.0.198/apprato/graphql",
+  //   uri: "http://localhost/apprato_backend/graphql",
   //   cache: new InMemoryCache(),
   // });
   useEffect(() => {

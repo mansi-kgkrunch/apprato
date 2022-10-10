@@ -54,6 +54,8 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
     minWidth: "260px",
     left: 0,
+    position: "unset",
+    backgroundColor: "#e5eaff",
   },
   subMenu: {
     fontSize: "18px",
@@ -83,6 +85,9 @@ const useStyles = makeStyles((theme) => ({
       top: "3px !important",
       right: "-2px",
     },
+  },
+  collapse: {
+    width: "100%",
   },
 }));
 
@@ -123,6 +128,11 @@ const SidebarNav = (props) => {
 
   function handleClick(id) {
     localStorage.setItem("menuId", JSON.stringify(id));
+  }
+  function handleCollpaseClick() {
+    setOpen(!open);
+  }
+  function handleMouseHover() {
     setOpen(!open);
   }
   return (
@@ -132,72 +142,6 @@ const SidebarNav = (props) => {
           <CloseIcon fontSize="small" />
         </ListItemIcon>
       </ListItem>
-      {/* <ListItem className={classes.listItem}>
-        <LinkHref to="/" onClick={onClose} className={classes.sidebarNavLink}>
-          <Typography
-            variant="body1"
-            color="textSecondary"
-            className={classes.listItemLink}
-          >
-            Home
-          </Typography>
-        </LinkHref>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <LinkHref to="/#about" onClick={onClose}>
-          <Typography
-            variant="body1"
-            color="textSecondary"
-            className={classes.listItemLink}
-          >
-            About
-          </Typography>
-        </LinkHref>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <LinkHref to="/#services" onClick={onClose}>
-          <Typography
-            variant="body1"
-            color="textSecondary"
-            className={classes.listItemLink}
-          >
-            Services
-          </Typography>
-        </LinkHref>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <LinkHref to="/#team" onClick={onClose}>
-          <Typography
-            variant="body1"
-            color="textSecondary"
-            className={classes.listItemLink}
-          >
-            Team
-          </Typography>
-        </LinkHref>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <LinkHref to="/#case-studies" onClick={onClose}>
-          <Typography
-            variant="body1"
-            color="textSecondary"
-            className={classes.listItemLink}
-          >
-            Case Studies
-          </Typography>
-        </LinkHref>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <LinkHref to="/blog" onClick={onClose}>
-          <Typography
-            variant="body1"
-            color="textSecondary"
-            className={classes.listItemLink}
-          >
-            Blog
-          </Typography>
-        </LinkHref>
-      </ListItem> */}
       {menuItems?.nodes.map(function(menu) {
         parentId.push(menu.databaseId);
 
@@ -209,7 +153,7 @@ const SidebarNav = (props) => {
                 className={classes.listItem}
                 key={menu.databaseId}
               >
-                {menu.childItems ? (
+                {menu.childItems.edges.length > 0 ? (
                   <>
                     <Typography
                       variant="body1"
@@ -219,14 +163,24 @@ const SidebarNav = (props) => {
                           ? classes.listItemTextHome
                           : classes.listItemText
                       }
-                      onClick={() => handleClick(menu.databaseId)}
+                      onClick={() => (
+                        handleClick(menu.databaseId),
+                        handleCollpaseClick(),
+                        onClose
+                      )}
+                      onMouseOver={() => handleMouseHover()}
+                      style={{
+                        width: "100%",
+                        display: "block",
+                      }}
                     >
                       {menu.label}{" "}
                       {menu.childItems.edges.length > 0 ? (
-                        <span>
+                        <span style={{ float: "right" }}>
                           <img
-                            src="/images/blue_arrow.png"
+                            src="/images/arrow.png"
                             className={classes.InnermenuIcon}
+                            style={{ filter: "none" }}
                           />
                         </span>
                       ) : (
@@ -247,7 +201,7 @@ const SidebarNav = (props) => {
                         textDecoration: "none",
                         position: "relative",
                       }}
-                      onClick={() => handleClick(menu.databaseId)}
+                      onClick={(() => handleClick(menu.databaseId), onClose)}
                     >
                       <Typography
                         variant="body1"
@@ -286,14 +240,19 @@ const SidebarNav = (props) => {
                   </>
                 )}
 
-                <Collapse in={open} timeout="auto" unmountOnExit>
+                <Collapse
+                  in={open}
+                  timeout="auto"
+                  unmountOnExit
+                  className={classes.collapse}
+                >
                   {menu.childItems ? (
                     <>
                       <List
                         className={classes.listItemSubMenu + " kg_cust_child"}
+                        onMouseLeave={() => handleMouseHover()}
                       >
                         {menu.childItems.edges.map(function(childMenu) {
-                          console.log(childMenu);
                           return (
                             <>
                               <ListItem
@@ -302,11 +261,13 @@ const SidebarNav = (props) => {
                                 style={{
                                   borderBottom: "0.4px solid #2630683d",
                                 }}
+                                onClick={onClose}
                               >
                                 <LinkHref
-                                  onClick={() =>
-                                    handleClick(childMenu.node.databaseId)
-                                  }
+                                  onClick={() => (
+                                    handleClick(childMenu.node.databaseId),
+                                    handleCollpaseClick()
+                                  )}
                                   to={`/${menu.label.toLowerCase()}/${
                                     childMenu.node.path.split("/")[2]
                                   }`}

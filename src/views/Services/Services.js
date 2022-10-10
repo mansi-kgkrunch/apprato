@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Section } from "components/organisms";
 import { Body, Experts, SubscribeBottom } from "./components";
-
 //import { sas1, sas2, sas3, sas4, sas5 } from "./data";
 
 // #region constants
@@ -105,7 +104,7 @@ const useStyles = makeStyles((theme) => ({
   shape: {},
 }));
 
-const Strategy = () => {
+const Services = () => {
   const classes = useStyles();
   const [width, setWidth] = useState(0);
 
@@ -133,6 +132,7 @@ const Strategy = () => {
     return width;
   };
   const wide = useWindowWide(1020);
+  
   // const menuId = localStorage.getItem("menuId", data);
   // console.log(menuId , 'menuId');
   return (
@@ -154,4 +154,4 @@ const Strategy = () => {
 // InnerPage.defaultProps = defaultProps;
 // #endregion
 
-export default Strategy;
+export default Services;

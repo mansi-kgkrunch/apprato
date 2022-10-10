@@ -96,9 +96,8 @@ const useStyles = makeStyles((theme) => ({
 const About = () => {
   const classes = useStyles();
   const menuId = JSON.parse(localStorage.getItem("menuId"));
-  console.log(menuId, "menuId");
 
-  if (menuId) {
+  //if (menuId) {
     var GET_PAGE = gql`
       {
         menuItem(id: ${menuId}, idType: DATABASE_ID) {
@@ -133,9 +132,10 @@ const About = () => {
         }
       }
     `;
-  }
+  //}
 
   const { loading, error, data } = useQuery(GET_PAGE);
+  if (loading) return <p>Loading Page...</p>;
   var pageContent = data?.menuItem.connectedNode?.node;
 
   return (

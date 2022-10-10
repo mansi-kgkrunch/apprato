@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   headerPaddingTop: {
     backgroundColor: "#f9f9f9",
-    backgroundImage: "url('/images/casestudies/CaseStudies.png')",
+    // backgroundImage: "url(`${}`)",
     paddingTop: "122.23px",
     backgroundSize: "cover",
     backgroundPosition: "center",
@@ -81,29 +81,25 @@ const useStyles = makeStyles((theme) => ({
 const CaseStudies = () => {
   const classes = useStyles();
   const menuId = JSON.parse(localStorage.getItem("menuId"));
-  console.log(menuId, "menuId");
-
-  if (menuId) {
-    var GET_PAGE = gql`
+  //if (menuId) {
+  var GET_PAGE = gql`
     {
       menuItem(id: ${menuId}, idType: DATABASE_ID) {
-        label
         id
+        label
         connectedNode {
           node {
             ... on Page {
               id
               caseStudies {
-                bodyTitle
-                description
-                title
-                subtitle
-                image1 {
+                headercontent
+                backgroundimage {
                   mediaItemUrl
                 }
-                image2 {
+                bodyimage {
                   mediaItemUrl
                 }
+                bodycontent
               }
             }
           }
@@ -111,9 +107,10 @@ const CaseStudies = () => {
       }
     }
   `;
-  }
+  //}
 
   const { loading, error, data } = useQuery(GET_PAGE);
+  if (loading) return <p>Loading Page...</p>;
   var pageContent = data?.menuItem.connectedNode?.node.caseStudies;
 
   const handleClick = () => {
@@ -122,7 +119,12 @@ const CaseStudies = () => {
 
   return (
     <div className={classes.root}>
-      <Section className={classes.headerPaddingTop}>
+      <Section
+        className={classes.headerPaddingTop}
+        style={{
+          backgroundImage: `url(${pageContent?.backgroundimage?.mediaItemUrl})`,
+        }}
+      >
         <Header post={pageContent} />
       </Section>
       <Section className={classes.bodyPaddingTop}>

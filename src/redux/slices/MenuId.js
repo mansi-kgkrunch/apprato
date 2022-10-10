@@ -5,7 +5,7 @@ const MenuIDState = {
 };
 
 export const MenuIDSlice = createSlice({
-  name: "menuid",
+  name: [],
   initialState: MenuIDState,
   reducers: {
     menuID: (state, action) => {

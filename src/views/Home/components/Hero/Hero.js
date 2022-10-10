@@ -7,56 +7,56 @@ import { SectionHeader } from "components/molecules";
 import { LearnMoreLink, Image } from "components/atoms";
 import { Link } from "react-scroll";
 import { Button } from "@material-ui/core";
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    position: "relative"
+    position: "relative",
   },
   heading: {
     "& h2": {
       [theme.breakpoints.down("md")]: {
-        margin: "1.5em 0 0"
+        margin: "1.5em 0 0",
       },
       [theme.breakpoints.down("sm")]: {
-        margin: "1em 0 0"
-      }
+        margin: "1em 0 0",
+      },
     },
     "& h4": {
-      color: "#ffff"
+      color: "#ffff",
     },
     "& h6": {
       margin: "1.5em 0",
       color: "#ffff",
       fontSize: "20px",
       [theme.breakpoints.down("sm")]: {
-        margin: "1em 0 0"
-      }
+        margin: "1em 0 0",
+      },
     },
     [theme.breakpoints.up("md")]: {
-      paddingRight: "3rem"
+      paddingRight: "3rem",
     },
     [theme.breakpoints.up("lg")]: {
-      paddingRight: "12rem"
+      paddingRight: "12rem",
     },
     [theme.breakpoints.up("xl")]: {
-      paddingRight: "23rem"
-    }
+      paddingRight: "23rem",
+    },
   },
   image: {
     maxWidth: "80%",
     height: "auto",
     [theme.breakpoints.up("lg")]: {
-      paddingLeft: "4rem"
+      paddingLeft: "4rem",
     },
     [theme.breakpoints.down("lg")]: {
-      paddingLeft: "2rem"
+      paddingLeft: "2rem",
     },
     [theme.breakpoints.down("md")]: {
       paddingLeft: "0",
-      margin: "0 auto"
-    }
+      margin: "0 auto",
+    },
   },
   reversemob: {
-    position: "absolute",
+    // position: "absolute",
     top: 0,
     flexDirection: "column",
     height: "100%",
@@ -71,8 +71,8 @@ const useStyles = makeStyles(theme => ({
       paddingTop: "260px",
       paddingBottom: "155px",
       position: "unset",
-      padding: "0 20px"
-    }
+      padding: "0 20px",
+    },
   },
   listItemButton: {
     whiteSpace: "nowrap",
@@ -85,35 +85,39 @@ const useStyles = makeStyles(theme => ({
     border: "2px solid white",
     [theme.breakpoints.down("lg")]: {
       fontSize: "1.5rem",
-      minWidth: "10rem"
+      minWidth: "10rem",
     },
     [theme.breakpoints.down("md")]: {
       fontSize: "1rem",
-      minWidth: "8rem"
+      minWidth: "8rem",
     },
-    textTransform: "initial"
+    textTransform: "initial",
   },
   kgMobileImage: {
     [theme.breakpoints.down("sm")]: {
-      display: "none"
-    }
-  }
+      display: "none",
+    },
+  },
 }));
 
-const Hero = props => {
+const Hero = (props) => {
   const { className, ...rest } = props;
   const classes = useStyles();
 
   return (
     <div className={clsx(classes.root, className, "kg_home_hero")} {...rest}>
       <Grid container justify="space-between" className={classes.kgMobileImage}>
-        <Image src="/images/hero_section.png"></Image>
+        {/* <Image src="/images/hero_section.png"></Image> */}
+        <video
+          autoplay="autoplay"
+          muted="muted"
+          controls="controls"
+          width="100%"
+        >
+          <source src="images/hero_video.mov" type="video/ogg" />{" "}
+        </video>
       </Grid>
-      <Grid
-        container
-        justify="space-between"
-        className={classes.reversemob + " kg_hero_desc"}
-      >
+      {/* <Grid container justify="space-between" className={classes.reversemob + " kg_hero_desc"}>
         <Grid
           item
           container
@@ -146,7 +150,7 @@ const Hero = props => {
             subtitleVariant="subtitle2"
           />
         </Grid>
-      </Grid>
+      </Grid> */}
     </div>
   );
 };
@@ -155,7 +159,7 @@ Hero.propTypes = {
   /**
    * External classes
    */
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default Hero;

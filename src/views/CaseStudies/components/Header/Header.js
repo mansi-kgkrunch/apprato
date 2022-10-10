@@ -158,10 +158,9 @@ const Header = (props) => {
         >
           <div class="kg-hero-content-area">
             <div class="kg-inner-hero-content">
-              <h1>{post?.title}</h1>
               <div
                 dangerouslySetInnerHTML={{
-                  __html: post?.subtitle,
+                  __html: post?.headercontent,
                 }}
               ></div>
             </div>

@@ -1,8 +1,11 @@
-import React from "react";
-import { Switch, Redirect } from "react-router-dom";
-
+import React, { useEffect } from 'react';
+import { Switch, Redirect,useLocation  } from "react-router-dom";
+import { gql } from "graphql-tag";
+import { Query } from "react-apollo";
+import { useQuery } from "@apollo/react-hooks";
 import { RouteWithLayout } from "./common";
 import { Main as MainLayout, Minimal as MinimalLayout } from "./layouts";
+
 
 import {
   Home as HomeView,
@@ -16,7 +19,60 @@ import {
   Contact as ContactView,
 } from "./views";
 
+const  getKeyByValue=(object, value)=> {
+  return Object.keys(object).find(key => object[key] === value);
+}
+
 const Routes = () => {
+
+  var current_menu_id='';
+  var GET_MENU  = gql`
+  {
+    menu(id: "dGVybTozNg==") {
+      menuItems(first: 100) {
+        nodes {
+          id
+          label
+          path
+          parentDatabaseId
+          databaseId
+          childItems {
+            edges {
+              node {
+                id
+                label
+                path
+                databaseId
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  `
+const { loading, errors, data } = useQuery(GET_MENU);
+var menuItems = data?.menu.menuItems;
+
+var CurrentMenuArray = [];
+{menuItems?.nodes.map(function(menu) {
+  CurrentMenuArray[menu.databaseId] = menu.path;
+})}
+
+const location = useLocation();
+var current_url = location.pathname;
+if(current_url.substr(-1) != '/')
+{
+  current_url=current_url+'/';
+}
+current_menu_id=getKeyByValue(CurrentMenuArray,current_url);
+if(current_menu_id)
+{
+  console.log(current_menu_id, "menuId");
+  localStorage.setItem("menuId", JSON.stringify(current_menu_id));
+}
+
+
   return (
     <Switch>
       <RouteWithLayout

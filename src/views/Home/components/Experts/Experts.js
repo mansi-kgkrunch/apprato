@@ -238,7 +238,7 @@ const Experts = props => {
                 />
               </span>
               <Typography className={classes.expertTitle}>
-                Prince2 Foundation Certified Cloud Practitioner.
+                Prince2 Foundation Certified  Practitioner.
               </Typography>
             </ListItem>
           </List>

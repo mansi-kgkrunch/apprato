@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
     //     padding: 0,
     //   },
     // },
+    "& .makeStyles-gridContainer-192": {
+      display: "flex",
+    },
     "& .MuiInputBase-root.MuiInput-root.makeStyles-textfield-57.MuiInputBase-fullWidth.MuiInput-fullWidth.MuiInputBase-formControl.MuiInput-formControl": {
       borderBottom: "2px solid #0e44ff",
     },
@@ -291,17 +294,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Body = (props) => {
-  const { className, ...rest } = props;
+ 
+  const { className,...rest } = props;
   const classes = useStyles();
   // const post = props.post;
 
   // const menuId = useSelector((state) => state.menuId.menuid);
   // console.log(menuId , 'menuId');
 
-  const menuId = JSON.parse(localStorage.getItem("menuId"));
-  console.log(menuId, "menuId");
+  var menuId = JSON.parse(localStorage.getItem("menuId"));
 
-  if (menuId) {
+  //if (menuId) {
     var GET_PAGE = gql`
     {
       menuItem(idType: DATABASE_ID, id: ${menuId}) {
@@ -322,9 +325,11 @@ const Body = (props) => {
       }
     }
   `;
-  }
+  //}
 
   const { loading, error, data } = useQuery(GET_PAGE);
+  if (loading) return <p>Loading Page...</p>;
+  //if (error) return <p>An error occured!</p>;
   var pageContent = data?.menuItem.connectedNode;
   return (
     <div className={clsx(classes.root, className)} {...rest}>
